@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="Monitoring &amp; Access History" />
+    <title>Monitoring &amp; Access History — AI LOTO Monitoring</title>
+    <link rel="stylesheet" href="assets/css/manual.css" />
+  </head>
+  <body data-page="monitoring.html">
+    <div class="layout">
+      <aside class="sidebar">
+        <div class="brand">
+          <img src="assets/images/sick-logo-blue.svg" alt="SICK" />
+          <h1>AI LOTO Monitoring</h1>
+          <p>
+            End-User Manual · v1.0.0<br />Supported system · v2.0.0<br />SICK
+          </p>
+        </div>
+        <nav class="nav">
+          <div class="nav-group">Start here</div>
+          <a href="index.html" data-current="index.html"
+            >Overview &amp; Quick Start</a
+          >
+          <div class="nav-group">Operate the system</div>
+          <a href="operations.html" data-current="operations.html"
+            >How AI LOTO Operates</a
+          >
+          <a href="monitoring.html" data-current="monitoring.html"
+            >Monitoring &amp; History</a
+          >
+          <div class="nav-group">Configure the system</div>
+          <a href="configuration.html" data-current="configuration.html"
+            >System Configuration</a
+          >
+          <a href="biostar2.html" data-current="biostar2.html"
+            >BioStar 2 Integration</a
+          >
+          <div class="nav-group">Administration</div>
+          <a href="administration.html" data-current="administration.html"
+            >Users, Roles &amp; Settings</a
+          >
+          <div class="nav-group">Panel reference</div>
+          <a href="panels.html" data-current="panels.html">Panel A / B / C</a>
+          <div class="nav-group">Support</div>
+          <a href="troubleshooting.html" data-current="troubleshooting.html"
+            >Troubleshooting</a
+          >
+          <a href="reference.html" data-current="reference.html"
+            >Reference &amp; Glossary</a
+          >
+        </nav>
+      </aside>
+      <main class="main">
+        <header class="topbar">
+          <button id="mobileMenu" class="mobile-menu">☰ Menu</button>
+          <div class="title">Monitoring &amp; Access History</div>
+        </header>
+        <article class="content">
+          <h1>Monitoring Dashboard & Access History</h1>
+          <p class="lead">
+            Monitoring is the primary operational page. It intentionally shows
+            high-level safety information rather than low-level diagnostic
+            details.
+          </p>
+          <figure class="figure">
+            <img
+              loading="lazy"
+              src="assets/screenshots/monitoring-light.jpg"
+              alt="Monitoring Dashboard — light theme. The worker table, floor plan and simplified Live Metrics are visible together."
+            />
+            <figcaption>
+              Monitoring Dashboard — light theme. The worker table, floor plan
+              and simplified Live Metrics are visible together.
+            </figcaption>
+          </figure>
+          <h2 id="workers">1. Active Workers</h2>
+          <p>
+            The top table lists workers currently registered inside. It shows
+            Entry Time, Team, User Name, Contact, Entrance Door and
+            Authentication Method (Fingerprint, Face, NFC or Unknown).
+          </p>
+          <ul>
+            <li>A successful first scan adds the worker to this table.</li>
+            <li>
+              An accepted OUT scan removes the worker from active presence.
+            </li>
+            <li>
+              <strong>Tag Out</strong> is a manual correction action and should
+              be used only by an account with the required permission.
+            </li>
+          </ul>
+          <h2 id="layout">2. Live shopfloor map</h2>
+          <p>
+            The left side shows the active floor-plan image configured in
+            Shopfloor Layout. Each placed gate displays its current runtime
+            state and may show a short secondary message:
+          </p>
+          <div class="table-wrap">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Gate display</th>
+                  <th>Meaning</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>CLOSED</td>
+                  <td>Gate close sequence is complete.</td>
+                </tr>
+                <tr>
+                  <td>OPENING</td>
+                  <td>Open sequence is in progress.</td>
+                </tr>
+                <tr>
+                  <td>OPEN</td>
+                  <td>Open sequence is complete.</td>
+                </tr>
+                <tr>
+                  <td>CLOSING</td>
+                  <td>Close sequence is in progress.</td>
+                </tr>
+                <tr>
+                  <td>FAULT</td>
+                  <td>
+                    Last commanded transition failed; inspect Gate Management
+                    and use Retry only after checking the cause.
+                  </td>
+                </tr>
+                <tr>
+                  <td>UNKNOWN / Initializing</td>
+                  <td>Current gate state is not yet established.</td>
+                </tr>
+                <tr>
+                  <td>Waiting AUX OFF / ON</td>
+                  <td>LOTO is waiting for physical FlexLock AUX feedback.</td>
+                </tr>
+                <tr>
+                  <td>Gateway Offline</td>
+                  <td>The gate's gateway is not currently reachable.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            The small rotation control on the map rotates the displayed site
+            plan by 180° for operator viewing only; it does not change the saved
+            gate positions.
+          </p>
+          <h2 id="metrics">3. Live Metrics</h2>
+          <div class="grid3">
+            <div class="card">
+              <h3>AI Detected People</h3>
+              <p>
+                Current Visionary people count. <strong>N/A</strong> means the
+                camera count is unavailable—not zero.
+              </p>
+            </div>
+            <div class="card">
+              <h3>Registered Workers Inside</h3>
+              <p>
+                Count of persisted active worker states created by accepted IN
+                scans and cleared by OUT scans.
+              </p>
+            </div>
+            <div class="card">
+              <h3>System Trust</h3>
+              <p>
+                <strong>GOOD</strong> means key monitoring sources are available
+                enough for the displayed status to be trusted.
+                <strong>NG</strong> indicates degraded/unavailable source data.
+              </p>
+            </div>
+            <div class="card">
+              <h3>People Mismatch</h3>
+              <p>
+                <strong>MISMATCH</strong> when AI detects more people than
+                registered workers while a gate is open.
+                <strong>IGNORED</strong> when no gate is open,
+                <strong>NORMAL</strong> when acceptable,
+                <strong>N/A</strong> when camera count is unavailable.
+              </p>
+            </div>
+            <div class="card">
+              <h3>Fall Detection</h3>
+              <p>
+                <strong>DETECTING</strong> while being confirmed,
+                <strong>FALL DETECTED</strong> after persistence,
+                <strong>NORMAL</strong> when clear,
+                <strong>IGNORED</strong> when no gate is open,
+                <strong>N/A</strong>
+                if unavailable.
+              </p>
+            </div>
+            <div class="card">
+              <h3>Site Safety Status</h3>
+              <p>Overall Unknown / Safe / Warning / Unsafe summary.</p>
+            </div>
+          </div>
+          <h2 id="retry">4. Gate retry from Monitoring</h2>
+          <p>
+            When a gate is in FAULT, Monitoring can show a retry action. Retry
+            repeats the failed open/close command using the same safe sequence.
+            Before retrying, check the physical gate, FlexLock/AUX condition and
+            Gateway connectivity. For repeated faults, use Gate Management and
+            Log Viewer.
+          </p>
+          <h2 id="dark">5. Light and dark modes</h2>
+          <p>
+            The application supports both themes. Operational meaning does not
+            change; colors and backgrounds adapt for readability.
+          </p>
+          <figure class="figure">
+            <img
+              loading="lazy"
+              src="assets/screenshots/monitoring-dark.jpg"
+              alt="Monitoring Dashboard — dark theme."
+            />
+            <figcaption>Monitoring Dashboard — dark theme.</figcaption>
+          </figure>
+          <h2 id="viewer">6. Viewer experience</h2>
+          <p>
+            Viewer accounts see the same operational data but
+            management/create/edit/delete controls are removed. The default
+            Viewer role can still issue manual gate Open/Close commands where
+            provided by the UI/permission configuration.
+          </p>
+          <figure class="figure">
+            <img
+              loading="lazy"
+              src="assets/screenshots/viewer-monitoring.jpg"
+              alt="Monitoring page with a Viewer account. Administrative navigation items are hidden."
+            />
+            <figcaption>
+              Monitoring page with a Viewer account. Administrative navigation
+              items are hidden.
+            </figcaption>
+          </figure>
+          <h2 id="history">7. Access Event Historian</h2>
+          <p>
+            The historian is read-only and is used to investigate who
+            authenticated, where and how. Filters include Worker ID, Worker
+            Name, Team, Phone Number, BioStar Device ID, Direction,
+            Authentication Method and date/time range.
+          </p>
+          <figure class="figure">
+            <img
+              loading="lazy"
+              src="assets/screenshots/access-events-list.jpg"
+              alt="Access Event Historian — filter and review accepted IN/OUT events."
+            />
+            <figcaption>
+              Access Event Historian — filter and review accepted IN/OUT events.
+            </figcaption>
+          </figure>
+          <h3>Event details</h3>
+          <p>
+            Open Details to see the worker event and BioStar information,
+            including worker ID/name/team/phone, IN/OUT direction, Gate, Access
+            Device, authentication method, occurrence time, gate session ID,
+            BioStar event type, BioStar device ID, received time and external
+            event ID.
+          </p>
+          <figure class="figure">
+            <img
+              loading="lazy"
+              src="assets/screenshots/access-event-details.jpg"
+              alt="Access Event details drawer."
+            />
+            <figcaption>Access Event details drawer.</figcaption>
+          </figure>
+          <footer class="footer">
+            <strong>AI LOTO Monitoring</strong> · System v2.0.0 · End-User
+            Manual v1.0.0 · SICK.
+          </footer>
+        </article>
+      </main>
+    </div>
+    <script src="assets/js/manual.js"></script>
+  </body>
+</html>

@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="Overview &amp; Quick Start" />
+    <title>Overview &amp; Quick Start — AI LOTO Monitoring</title>
+    <link rel="stylesheet" href="assets/css/manual.css" />
+  </head>
+  <body data-page="index.html">
+    <div class="layout">
+      <aside class="sidebar">
+        <div class="brand">
+          <img src="assets/images/sick-logo-blue.svg" alt="SICK" />
+          <h1>AI LOTO Monitoring</h1>
+          <p>
+            End-User Manual · v1.0.0<br />Supported system · v2.0.0<br />SICK
+          </p>
+        </div>
+        <nav class="nav">
+          <div class="nav-group">Start here</div>
+          <a href="index.html" data-current="index.html"
+            >Overview &amp; Quick Start</a
+          >
+          <div class="nav-group">Operate the system</div>
+          <a href="operations.html" data-current="operations.html"
+            >How AI LOTO Operates</a
+          >
+          <a href="monitoring.html" data-current="monitoring.html"
+            >Monitoring &amp; History</a
+          >
+          <div class="nav-group">Configure the system</div>
+          <a href="configuration.html" data-current="configuration.html"
+            >System Configuration</a
+          >
+          <a href="biostar2.html" data-current="biostar2.html"
+            >BioStar 2 Integration</a
+          >
+          <div class="nav-group">Administration</div>
+          <a href="administration.html" data-current="administration.html"
+            >Users, Roles &amp; Settings</a
+          >
+          <div class="nav-group">Panel reference</div>
+          <a href="panels.html" data-current="panels.html">Panel A / B / C</a>
+          <div class="nav-group">Support</div>
+          <a href="troubleshooting.html" data-current="troubleshooting.html"
+            >Troubleshooting</a
+          >
+          <a href="reference.html" data-current="reference.html"
+            >Reference &amp; Glossary</a
+          >
+        </nav>
+      </aside>
+      <main class="main">
+        <header class="topbar">
+          <button id="mobileMenu" class="mobile-menu">☰ Menu</button>
+          <div class="title">Overview &amp; Quick Start</div>
+        </header>
+        <article class="content">
+          <section class="hero">
+            <div class="eyebrow">
+              End-user manual · Version 1.0.0 · Supports AI LOTO Monitoring
+              v2.0.0
+            </div>
+            <h1>AI LOTO Monitoring</h1>
+            <p>
+              A practical guide for operators, managers, workers, viewers and
+              administrators using the web interface to monitor access,
+              configure devices and understand safety status.
+            </p>
+            <div class="chips">
+              <span class="chip">SICK</span
+              ><span class="chip">BioStar 2 integration</span
+              ><span class="chip">SICK SIG300</span
+              ><span class="chip">Visionary AI cameras</span>
+            </div>
+          </section>
+          <h2 id="what">1. What the system does</h2>
+          <p class="lead">
+            AI LOTO Monitoring combines worker authentication, gate control and
+            AI-based people monitoring. It receives successful authentication
+            events from BioStar 2, determines whether the worker is entering or
+            leaving, controls the assigned gate through a Gateway Device (SICK
+            SIG300 in the current deployment), compares registered workers with
+            Visionary AI detections, and presents a simplified safety picture on
+            the Monitoring page.
+          </p>
+          <div class="diagram">
+            <div class="diagram-row">
+              <div class="diagram-box">
+                Worker<br />Fingerprint / Face / NFC
+              </div>
+              <div class="diagram-arrow">→</div>
+              <div class="diagram-box">BioStar 2</div>
+              <div class="diagram-arrow">→</div>
+              <div class="diagram-box">AI LOTO Monitoring</div>
+              <div class="diagram-arrow">→</div>
+              <div class="diagram-box">Gate SIG300<br />FlexLock + MB1 Sol</div>
+            </div>
+            <div class="diagram-row" style="margin-top: 12px">
+              <div class="diagram-box">Visionary AI Cameras</div>
+              <div class="diagram-arrow">→</div>
+              <div class="diagram-box">People count + fall state</div>
+              <div class="diagram-arrow">→</div>
+              <div class="diagram-box">Site Safety Status</div>
+              <div class="diagram-arrow">→</div>
+              <div class="diagram-box">Alarm SIG300 outputs</div>
+            </div>
+          </div>
+          <h2 id="login">2. Sign in</h2>
+          <p>
+            Open the site URL supplied for the installed system. Enter your LOTO
+            account email and password, then sign in. After login, the sidebar
+            shows only the pages permitted for your account.
+          </p>
+          <div class="credential">
+            <strong>Initial / commissioning Admin account</strong><br />Email:
+            <code>admin@sick.com</code><br />Password: <code>admin</code
+            ><br /><span class="small"
+              >Change or control deployment credentials according to the site's
+              account-security policy.</span
+            >
+          </div>
+          <h3>Admin vs Viewer</h3>
+          <div class="grid2">
+            <div class="card role-admin">
+              <h3>Administrator</h3>
+              <p>
+                Full system configuration and administration. Admin can manage
+                gateways, gates, cameras, access devices, shopfloor layouts,
+                LOTO users, BioStar user management, settings, roles/permissions
+                and logs.
+              </p>
+            </div>
+            <div class="card role-viewer">
+              <h3>Viewer</h3>
+              <p>
+                Primarily read-only. Viewer can monitor the system, inspect
+                histories/device details and—by the default role definition—send
+                manual Gate Open/Close commands. Create/Edit/Delete controls are
+                hidden on management pages.
+              </p>
+            </div>
+          </div>
+          <div class="callout">
+            <strong>Viewer note</strong>The Active Workers table can render a
+            manual <em>Tag Out</em> control, but the default Viewer role does
+            not have the corresponding write permission. If a Viewer tries an
+            action not granted to the role, the backend can reject it. Use an
+            authorized account for worker-state correction unless permissions
+            were intentionally changed.
+          </div>
+          <h2 id="navigation">3. Main navigation</h2>
+          <div class="table-wrap">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Page</th>
+                  <th>Purpose</th>
+                  <th>Typical access</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Monitoring</td>
+                  <td>
+                    Live workers, floor plan, gate state, AI count and safety
+                    status.
+                  </td>
+                  <td>Admin / Viewer</td>
+                </tr>
+                <tr>
+                  <td>Access Event Historian</td>
+                  <td>
+                    Search worker IN/OUT events and authentication history.
+                  </td>
+                  <td>Admin / Viewer</td>
+                </tr>
+                <tr>
+                  <td>Gateway Device Management</td>
+                  <td>
+                    View/configure SIG300 gateways and DIO pin assignments.
+                  </td>
+                  <td>Admin config; Viewer view</td>
+                </tr>
+                <tr>
+                  <td>Gate Management</td>
+                  <td>
+                    Map a gate to gateway I/O and a BioStar access device;
+                    manual open/close.
+                  </td>
+                  <td>Admin config; Viewer view + open/close</td>
+                </tr>
+                <tr>
+                  <td>Camera Management</td>
+                  <td>
+                    Configure Visionary cameras and detection/evaluation IDs.
+                  </td>
+                  <td>Admin config; Viewer view</td>
+                </tr>
+                <tr>
+                  <td>Gate Access Device Management</td>
+                  <td>
+                    Register/synchronize BioStar access devices and map them to
+                    gates.
+                  </td>
+                  <td>Admin config; Viewer view</td>
+                </tr>
+                <tr>
+                  <td>User Management</td>
+                  <td>Manage AI LOTO web accounts.</td>
+                  <td>Admin</td>
+                </tr>
+                <tr>
+                  <td>Shopfloor Layout</td>
+                  <td>Upload floor plan and place gates.</td>
+                  <td>Admin</td>
+                </tr>
+                <tr>
+                  <td>BioStar 2 User Management</td>
+                  <td>
+                    Embedded BioStar user interface for workers/credentials.
+                  </td>
+                  <td>Admin</td>
+                </tr>
+                <tr>
+                  <td>Settings</td>
+                  <td>System, BioStar and camera polling settings.</td>
+                  <td>Admin</td>
+                </tr>
+                <tr>
+                  <td>Log Viewer</td>
+                  <td>View/download backend diagnostic logs.</td>
+                  <td>Admin / Viewer</td>
+                </tr>
+                <tr>
+                  <td>Roles & Permissions</td>
+                  <td>Manage LOTO application permissions.</td>
+                  <td>Admin</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <h2 id="quickstart">4. Recommended setup order</h2>
+          <ol class="steps">
+            <li>
+              <strong>Prepare BioStar 2 and scanner networking.</strong> Confirm
+              the BioStar server is reachable and configure its URL/login in
+              LOTO Settings. Assign each Suprema scanner a unique, stable site
+              IP and confirm BioStar can reach its device port.
+            </li>
+            <li>
+              <strong>Create Gateway Devices.</strong> Add Gate Control SIG300
+              gateways and the Alarm gateway. Confirm they show Connected.
+            </li>
+            <li>
+              <strong>Create/synchronize Gate Access Devices.</strong> In Gate
+              Access Device Management, enter the scanner's exact IP and port
+              (normally 51211), run TCP Search, select the detected device and
+              save. LOTO registers/synchronizes the BioStar device reference
+              automatically.
+            </li>
+            <li>
+              <strong>Create Gates.</strong> Assign the Gate Control gateway,
+              access device and the three required gate signals: FlexLock DO,
+              FlexLock AUX DI and MB1 Sol DO.
+            </li>
+            <li>
+              <strong>Create Cameras.</strong> Enter the camera address,
+              human-count endpoint, people-count volume IDs and fall-evaluation
+              IDs.
+            </li>
+            <li>
+              <strong>Upload Shopfloor Layout.</strong> Activate the plan, place
+              gates and adjust rotation.
+            </li>
+            <li>
+              <strong>Complete System Settings.</strong> Open the <strong>Settings</strong>
+              page and make sure all required configuration values are present
+              and suitable for the installation before final review.
+            </li>
+            <li>
+              <strong>Validate on Monitoring.</strong> Perform controlled test
+              scans and verify active worker, gate state, AI count, System Trust
+              and Site Safety Status.
+            </li>
+          </ol>
+          <h2 id="panel">5. Panel profiles</h2>
+          <div class="grid3">
+            <div class="card metric">
+              <span>Panel A</span><strong>5 Gates</strong
+              ><span class="small">3 cameras · 2 gateways</span>
+            </div>
+            <div class="card metric">
+              <span>Panel B</span><strong>10 Gates</strong
+              ><span class="small">6 cameras · 3 gateways</span>
+            </div>
+            <div class="card metric">
+              <span>Panel C</span><strong>20 Gates</strong
+              ><span class="small">9 cameras · 5 gateways</span>
+            </div>
+          </div>
+          <p>
+            All three panel sizes use the same software. Only deployed
+            topology/configuration changes.
+          </p>
+          <h2>6. Continue reading</h2>
+          <div class="page-links">
+            <a href="operations.html"
+              ><strong>How the system operates</strong>Authentication,
+              ENTER/EXIT and gate/output logic.</a
+            ><a href="monitoring.html"
+              ><strong>Monitoring Dashboard</strong>Interpret live workers,
+              counts and safety states.</a
+            ><a href="configuration.html"
+              ><strong>Configure devices & gates</strong>Gateway, access device,
+              gate, camera and layout setup.</a
+            ><a href="biostar2.html"
+              ><strong>BioStar 2</strong>Server preparation and user/credential
+              enrollment.</a
+            ><a href="administration.html"
+              ><strong>Administration</strong>LOTO accounts, settings, roles and
+              logs.</a
+            ><a href="troubleshooting.html"
+              ><strong>Troubleshooting</strong>Quick checks for common field
+              issues.</a
+            >
+          </div>
+          <footer class="footer">
+            <strong>AI LOTO Monitoring</strong> · System v2.0.0 · End-User
+            Manual v1.0.0 · SICK.
+          </footer>
+        </article>
+      </main>
+    </div>
+    <script src="assets/js/manual.js"></script>
+  </body>
+</html>

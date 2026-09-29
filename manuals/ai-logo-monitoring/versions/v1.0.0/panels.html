@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="Panel A / B / C Reference" />
+    <title>Panel A / B / C Reference — AI LOTO Monitoring</title>
+    <link rel="stylesheet" href="assets/css/manual.css" />
+  </head>
+  <body data-page="panels.html">
+    <div class="layout">
+      <aside class="sidebar">
+        <div class="brand">
+          <img src="assets/images/sick-logo-blue.svg" alt="SICK" />
+          <h1>AI LOTO Monitoring</h1>
+          <p>
+            End-User Manual · v1.0.0<br />Supported system · v2.0.0<br />SICK
+          </p>
+        </div>
+        <nav class="nav">
+          <div class="nav-group">Start here</div>
+          <a href="index.html" data-current="index.html"
+            >Overview &amp; Quick Start</a
+          >
+          <div class="nav-group">Operate the system</div>
+          <a href="operations.html" data-current="operations.html"
+            >How AI LOTO Operates</a
+          >
+          <a href="monitoring.html" data-current="monitoring.html"
+            >Monitoring &amp; History</a
+          >
+          <div class="nav-group">Configure the system</div>
+          <a href="configuration.html" data-current="configuration.html"
+            >System Configuration</a
+          >
+          <a href="biostar2.html" data-current="biostar2.html"
+            >BioStar 2 Integration</a
+          >
+          <div class="nav-group">Administration</div>
+          <a href="administration.html" data-current="administration.html"
+            >Users, Roles &amp; Settings</a
+          >
+          <div class="nav-group">Panel reference</div>
+          <a href="panels.html" data-current="panels.html">Panel A / B / C</a>
+          <div class="nav-group">Support</div>
+          <a href="troubleshooting.html" data-current="troubleshooting.html"
+            >Troubleshooting</a
+          >
+          <a href="reference.html" data-current="reference.html"
+            >Reference &amp; Glossary</a
+          >
+        </nav>
+      </aside>
+      <main class="main">
+        <header class="topbar">
+          <button id="mobileMenu" class="mobile-menu">☰ Menu</button>
+          <div class="title">Panel A / B / C Reference</div>
+        </header>
+        <article class="content">
+          <h1>Panel A / B / C Reference</h1>
+          <p class="lead">
+            AI LOTO Monitoring uses one common software platform. Panel profiles
+            differ by the number of gates, Visionary cameras and SIG300
+            gateways.
+          </p>
+          <p>
+            Below, the system architecture images show the main connection
+            concept for each panel profile. Select an image to open a larger
+            view.
+          </p>
+          <div class="table-wrap">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Profile</th>
+                  <th>Gates</th>
+                  <th>Expected cameras</th>
+                  <th>Gate Control gateways</th>
+                  <th>Alarm gateways</th>
+                  <th>Total gateways</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Panel A</td>
+                  <td>5</td>
+                  <td>3</td>
+                  <td>1 (Gates 1–5)</td>
+                  <td>1</td>
+                  <td>2</td>
+                </tr>
+                <tr>
+                  <td>Panel B</td>
+                  <td>10</td>
+                  <td>6</td>
+                  <td>2 (1–5, 6–10)</td>
+                  <td>1</td>
+                  <td>3</td>
+                </tr>
+                <tr>
+                  <td>Panel C</td>
+                  <td>20</td>
+                  <td>9</td>
+                  <td>4 (1–5, 6–10, 11–15, 16–20)</td>
+                  <td>1</td>
+                  <td>5</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <h2 id="panel-a">Panel A</h2>
+          <div class="grid2">
+            <figure class="figure">
+              <a
+                href="assets/images/panel-a-io-assignment.png"
+                target="_blank"
+                rel="noopener"
+                ><img
+                  src="assets/images/panel-a-io-assignment.png"
+                  alt="Panel A SIG300 I/O assignment table"
+              /></a>
+              <figcaption>
+                <strong>Panel A SIG300 I/O assignment.</strong> Gate Control and
+                Alarm SIG300 port/pin functions for the five-gate Panel A
+                profile. Red entries are digital outputs (DO); blue entries are
+                digital inputs (DI).
+              </figcaption>
+            </figure>
+            <figure class="figure">
+              <a
+                href="assets/images/panel-a-system-architecture.png"
+                target="_blank"
+                rel="noopener"
+                ><img
+                  src="assets/images/panel-a-system-architecture.png"
+                  alt="Panel A system architecture"
+              /></a>
+              <figcaption>
+                <strong>Panel A system architecture.</strong> Panel A supports
+                up to 5 gates, 3 Visionary AI-Assist cameras, 1 IPC, 1 SIG300
+                Gate Control gateway for Gates 1–5, and 1 SIG300 Alarm gateway
+                controlled by the IPC software.
+              </figcaption>
+            </figure>
+          </div>
+          <h2 id="panel-b">Panel B</h2>
+          <div class="grid2">
+            <figure class="figure">
+              <a
+                href="assets/images/panel-b-io-assignment.png"
+                target="_blank"
+                rel="noopener"
+                ><img
+                  src="assets/images/panel-b-io-assignment.png"
+                  alt="Panel B SIG300 I/O assignment table"
+              /></a>
+              <figcaption>
+                <strong>Panel B SIG300 I/O assignment.</strong> Two Gate Control
+                SIG300 banks for Gates 1–5 and 6–10, plus the common Alarm
+                SIG300 assignment.
+              </figcaption>
+            </figure>
+            <figure class="figure">
+              <a
+                href="assets/images/panel-b-system-architecture.png"
+                target="_blank"
+                rel="noopener"
+                ><img
+                  src="assets/images/panel-b-system-architecture.png"
+                  alt="Panel B system architecture"
+              /></a>
+              <figcaption>
+                <strong>Panel B system architecture.</strong> Panel B supports
+                up to 10 gates, 6 Visionary AI-Assist cameras, 1 IPC, 2 SIG300
+                Gate Control gateways for Gates 1–5 and Gates 6–10, and 1 SIG300
+                Alarm gateway controlled by the IPC software.
+              </figcaption>
+            </figure>
+          </div>
+          <h2 id="panel-c">Panel C</h2>
+          <div class="grid2">
+            <figure class="figure">
+              <a
+                href="assets/images/panel-c-io-assignment.png"
+                target="_blank"
+                rel="noopener"
+                ><img
+                  src="assets/images/panel-c-io-assignment.png"
+                  alt="Panel C SIG300 I/O assignment table"
+              /></a>
+              <figcaption>
+                <strong>Panel C SIG300 I/O assignment.</strong> Four Gate
+                Control SIG300 banks for Gates 1–5, 6–10, 11–15, and 16–20, plus
+                the common Alarm SIG300 assignment.
+              </figcaption>
+            </figure>
+            <figure class="figure">
+              <a
+                href="assets/images/panel-c-system-architecture.png"
+                target="_blank"
+                rel="noopener"
+                ><img
+                  src="assets/images/panel-c-system-architecture.png"
+                  alt="Panel C system architecture"
+              /></a>
+              <figcaption>
+                <strong>Panel C system architecture.</strong> Panel C supports
+                up to 20 gates, 9 Visionary AI-Assist cameras, 1 IPC, 4 SIG300
+                Gate Control gateways for Gates 1–5, 6–10, 11–15, and 16–20, and
+                1 SIG300 Alarm gateway controlled by the IPC software.
+              </figcaption>
+            </figure>
+          </div>
+
+          <footer class="footer">
+            <strong>AI LOTO Monitoring</strong> · System v2.0.0 · End-User
+            Manual v1.0.0 · SICK.
+          </footer>
+        </article>
+      </main>
+    </div>
+    <script src="assets/js/manual.js"></script>
+  </body>
+</html>

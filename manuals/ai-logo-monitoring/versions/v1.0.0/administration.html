@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="Administration" />
+    <title>Administration — AI LOTO Monitoring</title>
+    <link rel="stylesheet" href="assets/css/manual.css" />
+  </head>
+  <body data-page="administration.html">
+    <div class="layout">
+      <aside class="sidebar">
+        <div class="brand">
+          <img src="assets/images/sick-logo-blue.svg" alt="SICK" />
+          <h1>AI LOTO Monitoring</h1>
+          <p>
+            End-User Manual · v1.0.0<br />Supported system · v2.0.0<br />SICK
+          </p>
+        </div>
+        <nav class="nav">
+          <div class="nav-group">Start here</div>
+          <a href="index.html" data-current="index.html"
+            >Overview &amp; Quick Start</a
+          >
+          <div class="nav-group">Operate the system</div>
+          <a href="operations.html" data-current="operations.html"
+            >How AI LOTO Operates</a
+          >
+          <a href="monitoring.html" data-current="monitoring.html"
+            >Monitoring &amp; History</a
+          >
+          <div class="nav-group">Configure the system</div>
+          <a href="configuration.html" data-current="configuration.html"
+            >System Configuration</a
+          >
+          <a href="biostar2.html" data-current="biostar2.html"
+            >BioStar 2 Integration</a
+          >
+          <div class="nav-group">Administration</div>
+          <a href="administration.html" data-current="administration.html"
+            >Users, Roles &amp; Settings</a
+          >
+          <div class="nav-group">Panel reference</div>
+          <a href="panels.html" data-current="panels.html">Panel A / B / C</a>
+          <div class="nav-group">Support</div>
+          <a href="troubleshooting.html" data-current="troubleshooting.html"
+            >Troubleshooting</a
+          >
+          <a href="reference.html" data-current="reference.html"
+            >Reference &amp; Glossary</a
+          >
+        </nav>
+      </aside>
+      <main class="main">
+        <header class="topbar">
+          <button id="mobileMenu" class="mobile-menu">☰ Menu</button>
+          <div class="title">Administration</div>
+        </header>
+        <article class="content">
+          <h1>Administration</h1>
+          <p class="lead">
+            These pages configure AI LOTO application accounts and system
+            behavior. BioStar worker users are separate and are managed from the
+            embedded BioStar User Management page.
+          </p>
+          <h2 id="loto-users">1. User Management (LOTO web accounts)</h2>
+          <p>
+            Use this page for people who sign into the AI LOTO web
+            application—such as administrators, operators and viewers. It is not
+            the BioStar worker database.
+          </p>
+          <figure class="figure">
+            <img
+              loading="lazy"
+              src="assets/screenshots/users-list.jpg"
+              alt="LOTO User Management."
+            />
+            <figcaption>LOTO User Management.</figcaption>
+          </figure>
+          <ol class="steps">
+            <li>Click New.</li>
+            <li>Enter Name and Email.</li>
+            <li>Select one or more Roles.</li>
+            <li>
+              For a new user, enter and confirm a password that meets the
+              displayed password policy.
+            </li>
+            <li>
+              Save. Existing users can be viewed, edited, have their password
+              changed, or deleted when allowed.
+            </li>
+          </ol>
+          <figure class="figure focus">
+            <img
+              loading="lazy"
+              src="assets/screenshots/user-new.jpg"
+              alt="Create a LOTO web user."
+            />
+            <figcaption>Create a LOTO web user.</figcaption>
+          </figure>
+          <h2 id="roles">2. Roles & Permissions</h2>
+          <p>
+            The permission matrix shows which API actions each LOTO role can
+            perform. Standard roles include Admin, Operator, Viewer and User.
+          </p>
+          <figure class="figure">
+            <img
+              loading="lazy"
+              src="assets/screenshots/roles-permissions.jpg"
+              alt="Roles &amp; Permissions matrix."
+            />
+            <figcaption>Roles &amp; Permissions matrix.</figcaption>
+          </figure>
+          <div class="table-wrap">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Role</th>
+                  <th>Default behavior</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Admin</td>
+                  <td>All application permissions.</td>
+                </tr>
+                <tr>
+                  <td>Operator</td>
+                  <td>
+                    All non-admin-only functions except DELETE. No
+                    Users/Roles/Permissions/BioStar admin endpoints.
+                  </td>
+                </tr>
+                <tr>
+                  <td>Viewer</td>
+                  <td>
+                    GET/read access to operational pages, plus the Gate Open and
+                    Gate Close commands. Basic Settings GET is also allowed.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            Admin-only subjects include LOTO Users, Roles, Permissions and the
+            embedded BioStar 2 management session.
+          </p>
+          <h2 id="settings">3. Settings</h2>
+          <p>
+            The Settings page is grouped into General, BioStar2 Server and
+            Camera Settings.
+          </p>
+          <figure class="figure">
+            <img
+              loading="lazy"
+              src="assets/screenshots/settings-general.jpg"
+              alt="Settings — general/runtime configuration."
+            />
+            <figcaption>Settings — general/runtime configuration.</figcaption>
+          </figure>
+          <div class="table-wrap">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Setting</th>
+                  <th>Default / Example</th>
+                  <th>What it controls</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Retention Period</td>
+                  <td>365 days</td>
+                  <td>How long system data is retained.</td>
+                </tr>
+
+                <tr>
+                  <td>BioStar2 Base URL</td>
+                  <td>http://192.168.100.18</td>
+                  <td>
+                    Base URL used by AI LOTO Monitoring to access the BioStar 2
+                    REST API.
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>BioStar2 Web URL</td>
+                  <td>http://192.168.100.18</td>
+                  <td>
+                    Browser-facing BioStar 2 Web UI address used by the embedded
+                    management page.
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>BioStar2 WebSocket URL</td>
+                  <td>ws://192.168.100.18/wsapi</td>
+                  <td>
+                    WebSocket endpoint used to receive real-time BioStar 2
+                    events.
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>BioStar2 Login ID</td>
+                  <td>admin</td>
+                  <td>
+                    BioStar 2 administrator account used by AI LOTO Monitoring.
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>BioStar2 Login Password</td>
+                  <td>Configured password</td>
+                  <td>
+                    Password used to authenticate with the BioStar 2 server.
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>Allow Self-Signed Certificate</td>
+                  <td>Disabled</td>
+                  <td>
+                    Allows connection to an on-premise BioStar 2 server that
+                    uses a self-signed TLS certificate.
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>People Count Polling Duration</td>
+                  <td>1000 ms</td>
+                  <td>
+                    How often the system requests people-count information from
+                    the Visionary cameras.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="callout warn">
+            <strong>Changing timing values</strong>Only change polling,
+            persistence, retry or debounce values as part of controlled
+            commissioning. Very aggressive timing can increase device/network
+            load or produce undesirable operator behavior.
+          </div>
+          <h2 id="logs">4. Log Viewer</h2>
+          <p>
+            Use Log Viewer when a device action does not behave as expected. You
+            can filter/search logs, select a level, use a date/time range,
+            refresh, start/stop live streaming and download logs for support.
+          </p>
+          <figure class="figure">
+            <img
+              loading="lazy"
+              src="assets/screenshots/log-viewer.jpg"
+              alt="Log Viewer — use filters and streaming for troubleshooting."
+            />
+            <figcaption>
+              Log Viewer — use filters and streaming for troubleshooting.
+            </figcaption>
+          </figure>
+          <h2 id="theme">5. Theme, language and About</h2>
+          <p>The application header provides:</p>
+          <ul>
+            <li>
+              <strong>Language switch</strong> — changes supported UI language.
+            </li>
+            <li>
+              <strong>Theme switch</strong> — toggles light/dark mode. Runtime
+              logic is unchanged.
+            </li>
+            <li>
+              <strong>User menu / About</strong> — shows application
+              information/version and Logout.
+            </li>
+          </ul>
+          <div class="figure-grid">
+            <figure class="figure focus">
+              <img
+                loading="lazy"
+                src="assets/screenshots/language-switch.jpg"
+                alt="Header language/user controls."
+              />
+              <figcaption>Header language/user controls.</figcaption>
+            </figure>
+            <figure class="figure focus">
+              <img
+                loading="lazy"
+                src="assets/screenshots/about.jpg"
+                alt="About/application information."
+              />
+              <figcaption>About/application information.</figcaption>
+            </figure>
+          </div>
+          <h2 id="viewer-behavior">6. Viewer page behavior</h2>
+          <p>
+            Viewer accounts retain operational visibility without configuration
+            controls. On Gateway, Gate, Camera and Access Device pages,
+            create/edit/delete controls are hidden. Viewer can still open
+            Details. Gate Open/Close remains available by default.
+          </p>
+          <div class="figure-grid">
+            <figure class="figure">
+              <img
+                loading="lazy"
+                src="assets/screenshots/viewer-gateways.jpg"
+                alt="Gateway Device Management as Viewer."
+              />
+              <figcaption>Gateway Device Management as Viewer.</figcaption>
+            </figure>
+            <figure class="figure">
+              <img
+                loading="lazy"
+                src="assets/screenshots/viewer-access-devices.jpg"
+                alt="Gate Access Device Management as Viewer."
+              />
+              <figcaption>Gate Access Device Management as Viewer.</figcaption>
+            </figure>
+            <figure class="figure">
+              <img
+                loading="lazy"
+                src="assets/screenshots/viewer-cameras.jpg"
+                alt="Camera Management as Viewer."
+              />
+              <figcaption>Camera Management as Viewer.</figcaption>
+            </figure>
+            <figure class="figure">
+              <img
+                loading="lazy"
+                src="assets/screenshots/viewer-gates.jpg"
+                alt="Gate Management as Viewer; Open/Close remains available."
+              />
+              <figcaption>
+                Gate Management as Viewer; Open/Close remains available.
+              </figcaption>
+            </figure>
+          </div>
+          <footer class="footer">
+            <strong>AI LOTO Monitoring</strong> · System v2.0.0 · End-User
+            Manual v1.0.0 · SICK.
+          </footer>
+        </article>
+      </main>
+    </div>
+    <script src="assets/js/manual.js"></script>
+  </body>
+</html>

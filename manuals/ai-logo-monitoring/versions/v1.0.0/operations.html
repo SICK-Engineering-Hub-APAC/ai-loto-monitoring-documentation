@@ -1,0 +1,434 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="How the System Operates" />
+    <title>How the System Operates — AI LOTO Monitoring</title>
+    <link rel="stylesheet" href="assets/css/manual.css" />
+  </head>
+  <body data-page="operations.html">
+    <div class="layout">
+      <aside class="sidebar">
+        <div class="brand">
+          <img src="assets/images/sick-logo-blue.svg" alt="SICK" />
+          <h1>AI LOTO Monitoring</h1>
+          <p>
+            End-User Manual · v1.0.0<br />Supported system · v2.0.0<br />SICK
+          </p>
+        </div>
+        <nav class="nav">
+          <div class="nav-group">Start here</div>
+          <a href="index.html" data-current="index.html"
+            >Overview &amp; Quick Start</a
+          >
+          <div class="nav-group">Operate the system</div>
+          <a href="operations.html" data-current="operations.html"
+            >How AI LOTO Operates</a
+          >
+          <a href="monitoring.html" data-current="monitoring.html"
+            >Monitoring &amp; History</a
+          >
+          <div class="nav-group">Configure the system</div>
+          <a href="configuration.html" data-current="configuration.html"
+            >System Configuration</a
+          >
+          <a href="biostar2.html" data-current="biostar2.html"
+            >BioStar 2 Integration</a
+          >
+          <div class="nav-group">Administration</div>
+          <a href="administration.html" data-current="administration.html"
+            >Users, Roles &amp; Settings</a
+          >
+          <div class="nav-group">Panel reference</div>
+          <a href="panels.html" data-current="panels.html">Panel A / B / C</a>
+          <div class="nav-group">Support</div>
+          <a href="troubleshooting.html" data-current="troubleshooting.html"
+            >Troubleshooting</a
+          >
+          <a href="reference.html" data-current="reference.html"
+            >Reference &amp; Glossary</a
+          >
+        </nav>
+      </aside>
+      <main class="main">
+        <header class="topbar">
+          <button id="mobileMenu" class="mobile-menu">☰ Menu</button>
+          <div class="title">How the System Operates</div>
+        </header>
+        <article class="content">
+          <h1>How AI LOTO Monitoring Operates</h1>
+          <p class="lead">
+            This section explains what happens after BioStar 2 reports a
+            successful worker authentication, how ENTER/EXIT is decided, and how
+            physical outputs are sequenced.
+          </p>
+          <h2 id="auth-flow">1. Successful authentication flow</h2>
+          <div class="flow">
+            <span class="node">Worker successfully authenticates</span>
+            <span class="arrow">→</span>
+            <span class="node">Identify the gate</span>
+            <span class="arrow">→</span>
+            <span class="node">Check whether to record ENTER or EXIT</span>
+            <span class="arrow">→</span>
+            <span class="node">Update monitoring</span>
+            <span class="arrow">→</span>
+            <span class="node">Open or close the gate</span>
+          </div>
+          <p>
+            The backend accepts successful BioStar authentication families such
+            as <span class="badge-blue">IDENTIFY_SUCCESS…</span> and
+            <span class="badge-blue">VERIFY_SUCCESS…</span>. The authentication
+            method is classified as Fingerprint, Face, NFC/Card or Unknown. The
+            BioStar device ID in the event must match a local Gate Access Device
+            that is assigned to a Gate.
+          </p>
+          <div class="callout">
+            <strong>Duplicate protection</strong>External BioStar event IDs are
+            treated as idempotent, and rapid repeated events for the same user +
+            device are suppressed inside the configured BioStar Event Debounce
+            Window (default 1 second).
+          </div>
+          <h2 id="direction">2. How ENTER and EXIT are determined</h2>
+          <p>
+            The scanner does not have a permanent “IN” or “OUT” direction. The
+            system uses the worker’s active state:
+          </p>
+          <div class="grid2">
+            <div class="card">
+              <h3>No active worker state</h3>
+              <p>
+                The accepted scan is <strong>TAG_IN</strong>. The worker becomes
+                registered inside and the gate associated with the scanning
+                access device is opened through the safe gate sequence.
+              </p>
+            </div>
+            <div class="card">
+              <h3>Worker already active inside</h3>
+              <p>
+                The accepted scan is <strong>TAG_OUT</strong>. The active worker
+                state is cleared. Gate close behavior depends on the session and
+                whether other workers remain inside.
+              </p>
+            </div>
+          </div>
+          <h3 id="one-gate">Normal one-gate example</h3>
+          <ol class="steps">
+            <li>Worker authenticates at Gate 1 while not registered inside.</li>
+            <li>
+              LOTO records <strong>IN</strong>, creates/joins the Gate 1 session
+              and commands Gate 1 to open.
+            </li>
+            <li>
+              When the worker later authenticates again and is still active,
+              LOTO records <strong>OUT</strong>.
+            </li>
+            <li>
+              If this makes the session count zero, Gate 1 is commanded to
+              close. If other workers remain in that session, no close command
+              is issued yet.
+            </li>
+          </ol>
+          <h3 id="cross-gate">Cross-gate example</h3>
+          <div class="callout warn">
+            <strong>Current cross-gate rule</strong>A worker can enter through
+            one gate and authenticate at a different gate to exit. The active
+            session remains associated with the original entrance gate.
+          </div>
+          <ol class="steps">
+            <li>
+              Worker enters through <strong>Gate A</strong>; worker is active
+              inside.
+            </li>
+            <li>
+              The same worker later authenticates at <strong>Gate B</strong>.
+              Because the worker is already active, this is interpreted as
+              <strong>OUT</strong>, not another IN.
+            </li>
+            <li>
+              If no active workers remain from the original entrance gate, LOTO
+              closes
+              <strong>the original session gate (Gate A)</strong>.
+            </li>
+            <li>
+              The scanning gate (Gate B) is
+              <strong>not closed</strong> for this inside-to-outside cross-gate
+              exit in the current deployment, because the installed scan path is
+              treated as one-way outside access.
+            </li>
+          </ol>
+          <h2 id="gate-open">3. Gate open sequence</h2>
+          <div class="flow">
+            <span class="node">FlexLock DO OFF</span><span class="arrow">→</span
+            ><span class="node">Wait AUX OFF</span><span class="arrow">→</span
+            ><span class="node">MB1 Sol DO ON</span><span class="arrow">→</span
+            ><span class="node">Gate OPENED</span>
+          </div>
+          <div class="table-wrap">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Step</th>
+                  <th>Runtime indication</th>
+                  <th>What the system does</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>OPENING / SETTING_FLEXLOCK_OFF</td>
+                  <td>Writes FlexLock control output OFF.</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>WAITING_AUX_OFF</td>
+                  <td>
+                    Reads the configured FlexLock AUX input repeatedly. The
+                    sequence does not advance until AUX is OFF.
+                  </td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>SETTING_MB1_ON</td>
+                  <td>Writes MB1 Sol output ON.</td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td>OPEN / IDLE</td>
+                  <td>
+                    The system reports the gate OPEN and publishes the live
+                    runtime update.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <h2 id="gate-close">4. Gate close sequence</h2>
+          <div class="flow">
+            <span class="node">MB1 Sol DO OFF</span><span class="arrow">→</span
+            ><span class="node">Wait AUX ON</span><span class="arrow">→</span
+            ><span class="node">FlexLock DO ON</span><span class="arrow">→</span
+            ><span class="node">Gate CLOSED</span>
+          </div>
+          <div class="table-wrap">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Step</th>
+                  <th>Runtime indication</th>
+                  <th>What the system does</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>CLOSING / SETTING_MB1_OFF</td>
+                  <td>Writes MB1 Sol output OFF.</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>WAITING_AUX_ON</td>
+                  <td>Reads FlexLock AUX until it becomes ON.</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>SETTING_FLEXLOCK_ON</td>
+                  <td>Writes FlexLock control output ON.</td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td>CLOSED / IDLE</td>
+                  <td>The system reports the gate CLOSED.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="callout danger">
+            <strong>AUX feedback is authoritative</strong>LOTO does not report a
+            transition complete just because it successfully wrote an output.
+            The configured FlexLock AUX input is the feedback used to advance
+            the open/close sequence.
+          </div>
+          <h3>Timeout, retry and FAULT</h3>
+          <p>
+            Temporary SIG300 communication errors are retried automatically
+            without restarting the whole gate sequence. Manual gate operations
+            wait up to 15 seconds for the command to complete. Gate commands
+            triggered by BioStar can retry up to 3 times if they time out. If
+            the operation still cannot complete, the gate enters
+            <strong>FAULT</strong> state, and the failed step is shown in
+            Monitoring and Gate Management so the operator can retry it.
+          </p>
+          <h2 id="manual">5. Manual Open / Close</h2>
+          <p>
+            Manual commands from Gate Management use the same physical sequences
+            above. They are useful for controlled maintenance or recovery, but
+            they
+            <strong
+              >do not add or remove workers from the active-worker list</strong
+            >. Worker presence is managed by accepted authentication events or
+            an authorized manual Tag Out operation.
+          </p>
+          <h2 id="alarm">6. Alarm gateway output meanings</h2>
+          <p>
+            Alarm outputs are logical functions mapped to pins on all Gateway
+            Devices with role <strong>Alarm</strong>. All outputs initialize to
+            their configured startup default; the standard topology uses
+            LOW/OFF.
+          </p>
+          <div class="table-wrap">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Logical output</th>
+                  <th>HIGH / ON condition in current code</th>
+                  <th>Operational meaning</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Green</strong></td>
+                  <td>
+                    Registered workers = 0 and all gates are closed, while
+                    required alarm facts are known.
+                  </td>
+                  <td>No registered workers inside; gates are closed.</td>
+                </tr>
+                <tr>
+                  <td><strong>Orange</strong></td>
+                  <td>
+                    Registered workers &gt; 0 and AI detected people = 0, while
+                    required alarm facts are known.
+                  </td>
+                  <td>
+                    Workers are registered but AI currently sees no people.
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>Red</strong></td>
+                  <td>
+                    Registered workers &gt; 0 and AI detected people &gt; 0,
+                    while required alarm facts are known.
+                  </td>
+                  <td>People are registered and AI detects people.</td>
+                </tr>
+                <tr>
+                  <td><strong>Fall</strong></td>
+                  <td>
+                    Fall state active <em>and</em> at least one gate is open.
+                  </td>
+                  <td>Fall alarm condition during gate-open monitoring.</td>
+                </tr>
+                <tr>
+                  <td><strong>Mismatch</strong></td>
+                  <td>
+                    Registered worker count &lt; AI detected people count
+                    <em>and</em> a gate is open.
+                  </td>
+                  <td>AI detects more people than are registered inside.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            Outputs are evaluated independently. For example, Red can be ON at
+            the same time as Fall and/or Mismatch. If required safety facts are
+            not available after startup, the software keeps the logical alarm
+            outputs LOW rather than inventing a “safe” state.
+          </p>
+          <h3>Default Alarm SIG300 mapping</h3>
+          <div class="table-wrap">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Port / Pin</th>
+                  <th>Function</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>P1 Pin 2</td>
+                  <td>Alarm Green</td>
+                </tr>
+                <tr>
+                  <td>P1 Pin 4</td>
+                  <td>Alarm Orange</td>
+                </tr>
+                <tr>
+                  <td>P2 Pin 2</td>
+                  <td>Alarm Red</td>
+                </tr>
+                <tr>
+                  <td>P2 Pin 4</td>
+                  <td>Alarm Fall</td>
+                </tr>
+                <tr>
+                  <td>P3 Pin 2</td>
+                  <td>Alarm Mismatch</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <h2 id="safety">7. Site Safety Status</h2>
+          <div class="grid4">
+            <div class="card metric">
+              <span class="status neutral">UNKNOWN</span>
+              <p class="small">
+                Required facts are incomplete or do not yet form a classified
+                state.
+              </p>
+            </div>
+            <div class="card metric">
+              <span class="status good">SAFE</span>
+              <p class="small">
+                Trusted sources available; no workers/AI people inside; all
+                gates closed; no active fall/mismatch/transition/fault.
+              </p>
+            </div>
+            <div class="card metric">
+              <span class="status warn">WARNING</span>
+              <p class="small">
+                Sources are available; workers are inside and the registered
+                count matches the AI count.
+              </p>
+            </div>
+            <div class="card metric">
+              <span class="status bad">UNSAFE</span>
+              <p class="small">
+                Camera or Alarm Gateway unavailable, gate state unknown, AI
+                count exceeds registered workers, or gate fault is active.
+              </p>
+            </div>
+          </div>
+          <p>
+            <strong>System Trust</strong> shows <strong>GOOD</strong> when
+            required monitoring sources are sufficiently available/current;
+            otherwise it shows <strong>NG</strong>. Treat N/A/NG as a
+            data-quality or source-availability condition, not as zero people.
+          </p>
+          <h2 id="camera">8. Visionary AI processing</h2>
+          <p>
+            Configured Visionary cameras provide two independent kinds of
+            information:
+          </p>
+          <ul>
+            <li>
+              <strong>People count:</strong> people are counted only from
+              configured people-count evaluation/volume ID. Unavailable camera
+              data is not converted to zero.
+            </li>
+            <li>
+              <strong>Fall detection:</strong> configured fall evaluation ID
+              use the Visionary Field Evaluation state.
+            </li>
+          </ul>
+          <footer class="footer">
+            <strong>AI LOTO Monitoring</strong> · System v2.0.0 · End-User
+            Manual v1.0.0 · SICK.
+          </footer>
+        </article>
+      </main>
+    </div>
+    <script src="assets/js/manual.js"></script>
+  </body>
+</html>

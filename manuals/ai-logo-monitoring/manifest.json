@@ -1,0 +1,20 @@
+{
+  "slug": "ai-logo-monitoring",
+  "title": "AI LOTO Monitoring End-User Manual",
+  "description": "End-user guide for AI LOTO Monitoring operation, monitoring, configuration, administration, and troubleshooting.",
+  "publicPath": "ai-logo-monitoring",
+  "manualType": "usage",
+  "latest": "v1.0.0",
+  "versions": [
+    {
+      "version": "v1.0.0",
+      "status": "current",
+      "date": "2026-09-29",
+      "summary": "Initial public end-user manual for AI LOTO Monitoring.",
+      "compatibleAppVersions": [
+        "AI LOTO Monitoring v2.0.0"
+      ],
+      "compatibleFirmwareVersions": []
+    }
+  ]
+}

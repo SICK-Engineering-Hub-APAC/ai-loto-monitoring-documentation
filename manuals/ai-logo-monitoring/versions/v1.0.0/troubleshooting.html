@@ -1,0 +1,509 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="Troubleshooting" />
+    <title>Troubleshooting — AI LOTO Monitoring</title>
+    <link rel="stylesheet" href="assets/css/manual.css" />
+  </head>
+  <body data-page="troubleshooting.html">
+    <div class="layout">
+      <aside class="sidebar">
+        <div class="brand">
+          <img src="assets/images/sick-logo-blue.svg" alt="SICK" />
+          <h1>AI LOTO Monitoring</h1>
+          <p>
+            End-User Manual · v1.0.0<br />Supported system · v2.0.0<br />SICK
+          </p>
+        </div>
+        <nav class="nav">
+          <div class="nav-group">Start here</div>
+          <a href="index.html" data-current="index.html"
+            >Overview &amp; Quick Start</a
+          >
+          <div class="nav-group">Operate the system</div>
+          <a href="operations.html" data-current="operations.html"
+            >How AI LOTO Operates</a
+          >
+          <a href="monitoring.html" data-current="monitoring.html"
+            >Monitoring &amp; History</a
+          >
+          <div class="nav-group">Configure the system</div>
+          <a href="configuration.html" data-current="configuration.html"
+            >System Configuration</a
+          >
+          <a href="biostar2.html" data-current="biostar2.html"
+            >BioStar 2 Integration</a
+          >
+          <div class="nav-group">Administration</div>
+          <a href="administration.html" data-current="administration.html"
+            >Users, Roles &amp; Settings</a
+          >
+          <div class="nav-group">Panel reference</div>
+          <a href="panels.html" data-current="panels.html">Panel A / B / C</a>
+          <div class="nav-group">Support</div>
+          <a href="troubleshooting.html" data-current="troubleshooting.html"
+            >Troubleshooting</a
+          >
+          <a href="reference.html" data-current="reference.html"
+            >Reference &amp; Glossary</a
+          >
+        </nav>
+      </aside>
+      <main class="main">
+        <header class="topbar">
+          <button id="mobileMenu" class="mobile-menu">☰ Menu</button>
+          <div class="title">Troubleshooting</div>
+        </header>
+        <article class="content">
+          <h1>Simple Troubleshooting</h1>
+          <p class="lead">
+            Start with the symptom in Monitoring, then open the corresponding
+            management page for detail. Use Log Viewer when the visible status
+            is not enough.
+          </p>
+          <h2 id="dashboard">1. Monitoring shows N/A, NG or UNKNOWN</h2>
+          <div class="table-wrap">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Symptom</th>
+                  <th>Check</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>AI Detected People = N/A</td>
+                  <td>
+                    Camera Management → connection, polling and configured
+                    people volumes.
+                  </td>
+                  <td>
+                    Confirm camera network, port, endpoint and evaluation IDs.
+                    Do not interpret N/A as zero.
+                  </td>
+                </tr>
+                <tr>
+                  <td>Fall Detection = N/A</td>
+                  <td>Camera has fall evaluation IDs and is connected.</td>
+                  <td>
+                    Confirm Visionary Field Evaluation configuration and IDs.
+                  </td>
+                </tr>
+                <tr>
+                  <td>System Trust = NG</td>
+                  <td>Camera availability, Alarm gateway, gate state.</td>
+                  <td>
+                    Open Camera/Gateway/Gate details and restore missing source.
+                  </td>
+                </tr>
+                <tr>
+                  <td>Site Safety = UNKNOWN</td>
+                  <td>Required facts are not yet complete.</td>
+                  <td>
+                    Wait for startup initialization or restore unavailable
+                    sources.
+                  </td>
+                </tr>
+                <tr>
+                  <td>Site Safety = UNSAFE</td>
+                  <td>
+                    Camera/alarm gateway unavailable, unknown gate, mismatch or
+                    gate fault.
+                  </td>
+                  <td>
+                    Use the individual metrics and device pages to identify the
+                    exact condition.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <h2 id="gateway">2. Gateway is Disconnected / Unavailable</h2>
+          <ol class="steps">
+            <li>Check power and Ethernet connectivity to the SIG300.</li>
+            <li>
+              Confirm the IP in Gateway Device Management matches the device.
+            </li>
+            <li>
+              Open Details and review Connection, Initialization, Failures and
+              Last Error.
+            </li>
+            <li>Use Refresh pin states after connectivity is restored.</li>
+            <li>
+              The default logic marks the gateway unavailable after 3
+              consecutive communication failures. Initialization/retry loops
+              continue attempting recovery.
+            </li>
+            <li>
+              If repeated failures continue, open Log Viewer and inspect
+              Gateway-related errors.
+            </li>
+          </ol>
+          <h2 id="sig300-manual">
+            3. Manual SIG300 I/O recovery from the device WebUI
+          </h2>
+          <p>
+            If AI LOTO Monitoring is hung, unavailable, or cannot complete a
+            gate transition, an
+            <strong>authorized maintenance person</strong> can inspect and, when
+            permitted by the site procedure, manually operate the configured
+            SIG300 I/O from the SIG300 WebUI. Use this only as a controlled
+            recovery/diagnostic action. It does not replace the approved LOTO or
+            machine-safety procedure.
+          </p>
+          <div class="callout danger">
+            <strong>Before changing any output</strong>Make sure the affected
+            gate/area is safe, nobody can be trapped or exposed to hazardous
+            motion, and automated software is not simultaneously driving the
+            same SIG300 outputs. Never bypass the FlexLock AUX feedback logic
+            just to force a gate state.
+          </div>
+          <h3>3.1 Open the SIG300 WebUI and identify the correct gateway</h3>
+          <ol class="steps">
+            <li>
+              From a PC on the approved machine network, open
+              <span class="kbd">http://&lt;SIG300-IP&gt;/</span>.
+            </li>
+            <li>
+              Confirm that the device is the intended
+              <strong>Gate Control SIG300</strong> or
+              <strong>Alarm SIG300</strong>. Use the IP/addressing defined in
+              Gateway Device Management and the panel reference tables.
+            </li>
+            <li>
+              On the Home page, review the configured pin modes and current
+              states before making any change.
+            </li>
+          </ol>
+          <figure class="figure">
+            <a
+              href="assets/screenshots/sig300-home-io-overview.png"
+              target="_blank"
+              rel="noopener"
+              ><img
+                loading="lazy"
+                src="assets/screenshots/sig300-home-io-overview.png"
+                alt="SIG300 Home page showing port pin modes and states"
+            /></a>
+            <figcaption>
+              <strong>SIG300 Home / I/O overview.</strong> Use this page to
+              confirm which pins are configured as Digital in or Digital out and
+              to observe their current state.
+            </figcaption>
+          </figure>
+          <h3>3.2 Select the required port</h3>
+          <ol class="steps">
+            <li>Open <strong>Ports</strong> from the left navigation.</li>
+            <li>
+              Select the port assigned to the required gate/output. Do not
+              guess: use the <strong>Panel A / B / C</strong> I/O assignment
+              table in this manual or the Gateway Device details in AI LOTO
+              Monitoring.
+            </li>
+            <li>
+              Confirm that the selected pin mode matches the approved
+              configuration. Do not change pin direction during normal recovery
+              unless correcting a known configuration error.
+            </li>
+          </ol>
+          <figure class="figure">
+            <a
+              href="assets/screenshots/sig300-ports-menu.png"
+              target="_blank"
+              rel="noopener"
+              ><img
+                loading="lazy"
+                src="assets/screenshots/sig300-ports-menu.png"
+                alt="SIG300 Ports navigation"
+            /></a>
+            <figcaption>
+              <strong>Ports navigation.</strong> Select the exact SIG300 port
+              used by the affected gate or alarm output.
+            </figcaption>
+          </figure>
+          <h3>3.3 Read an input or manually operate a digital output</h3>
+          <p>
+            For a configured <strong>Digital in</strong>, the state is read-only
+            and should be used to verify physical feedback such as the FlexLock
+            AUX signal. For a configured <strong>Digital out</strong>, the
+            Process data area provides a LOW/HIGH control. The configured output
+            mode should remain as commissioned (for example,
+            <strong>Push pull</strong> in the supplied setup).
+          </p>
+          <figure class="figure">
+            <a
+              href="assets/screenshots/sig300-port-control.png"
+              target="_blank"
+              rel="noopener"
+              ><img
+                loading="lazy"
+                src="assets/screenshots/sig300-port-control.png"
+                alt="SIG300 port page with digital input and digital output process data controls"
+            /></a>
+            <figcaption>
+              <strong>Port I/O control.</strong> In the example, Pin 4 is a
+              Digital input and Pin 2 is a Digital output. The input state is
+              observed; the output can be switched LOW/HIGH from Process data.
+            </figcaption>
+          </figure>
+          <div class="table-wrap">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Manual gate action</th>
+                  <th>Required sequence on Gate Control SIG300</th>
+                  <th>What to verify</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Open gate</td>
+                  <td>
+                    1. Set FlexLock DO <strong>LOW / OFF</strong><br />2. Wait
+                    for FlexLock AUX DI <strong>OFF</strong><br />3. Set MB1 Sol
+                    solenoid DO <strong>HIGH / ON</strong>
+                  </td>
+                  <td>Do not energize MB1 Sol until AUX confirms OFF.</td>
+                </tr>
+                <tr>
+                  <td>Close gate</td>
+                  <td>
+                    1. Set MB1 Sol solenoid DO <strong>LOW / OFF</strong
+                    ><br />2. Wait for FlexLock AUX DI <strong>ON</strong
+                    ><br />3. Set FlexLock DO <strong>HIGH / ON</strong>
+                  </td>
+                  <td>Do not energize FlexLock until AUX confirms ON.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            For the <strong>Alarm SIG300</strong>, the Green, Orange, Red,
+            Worker Fall and Inside Mismatch outputs are independent
+            software-controlled DOs. Manual toggling should be limited to
+            controlled test/recovery work; restore the outputs to the expected
+            state before returning control to AI LOTO Monitoring.
+          </p>
+          <h3>3.4 Return control to AI LOTO Monitoring</h3>
+          <ol class="steps">
+            <li>Record any manual I/O change made during recovery.</li>
+            <li>
+              Restore the gate to a known physical state and confirm the AUX
+              feedback matches that state.
+            </li>
+            <li>
+              Restore any manually forced alarm output to the expected state.
+            </li>
+            <li>
+              Recover/restart AI LOTO Monitoring according to the site
+              procedure.
+            </li>
+            <li>
+              Open Gateway Details and Gate Details, refresh pin states, and
+              confirm software and physical states agree before normal operation
+              resumes.
+            </li>
+          </ol>
+          <div class="callout warn">
+            <strong>If the expected AUX input never changes</strong>Stop manual
+            output sequencing and inspect the FlexLock, actuator, wiring and
+            SIG300 input configuration. Do not continue by forcing the next
+            output.
+          </div>
+          <h2 id="gate-fault">4. Gate stuck OPENING / CLOSING or FAULT</h2>
+          <p>Open Gate Details and check the current transition step:</p>
+          <ul>
+            <li>
+              <strong>Waiting AUX OFF:</strong> verify the FlexLock AUX input
+              physically becomes OFF during opening.
+            </li>
+            <li>
+              <strong>Waiting AUX ON:</strong> verify AUX becomes ON during
+              closing.
+            </li>
+            <li>
+              <strong>Gateway Offline:</strong> restore SIG300 connectivity
+              first.
+            </li>
+            <li>
+              <strong>Failed to open / close:</strong> inspect pin states and
+              Last Error, then Retry only after the physical cause is
+              safe/cleared.
+            </li>
+          </ul>
+          <div class="callout danger">
+            <strong>Do not bypass AUX feedback in software.</strong>The state
+            machine intentionally waits for physical feedback before advancing.
+          </div>
+          <h2 id="biostar-events">
+            5. BioStar authentication happens but no LOTO event appears
+          </h2>
+          <ol class="steps">
+            <li>
+              Confirm BioStar itself records a successful IDENTIFY/VERIFY
+              authentication.
+            </li>
+            <li>
+              Confirm the BioStar WebSocket URL and credentials in LOTO
+              Settings.
+            </li>
+            <li>
+              Confirm Gate Access Device Management contains the same BioStar
+              Device ID.
+            </li>
+            <li>
+              Confirm that Access Device is enabled and assigned to the correct
+              Gate.
+            </li>
+            <li>
+              Check whether repeated scans happened inside the debounce window.
+            </li>
+            <li>Open Log Viewer for BioStar connection/event errors.</li>
+          </ol>
+          <h2 id="embedded">6. Embedded BioStar 2 page does not open</h2>
+          <ol class="steps">
+            <li>
+              Check BioStar2 Base URL, Web URL, Login ID and Login Password in
+              Settings.
+            </li>
+            <li>Verify the server can reach BioStar over HTTPS.</li>
+            <li>
+              If the on-premise BioStar certificate is self-signed and approved
+              for the deployment, enable
+              <strong>Allow Self-Signed Certificate</strong> for backend calls.
+            </li>
+          </ol>
+
+          <h2 id="access-device">
+            7. TCP Search cannot find a Suprema access device
+          </h2>
+          <ol class="steps">
+            <li>
+              Verify that the IP entered in LOTO is the
+              <strong>scanner's own IP</strong>, not the BioStar or LOTO server
+              address.
+            </li>
+            <li>
+              Verify the scanner already has that IP assigned. LOTO TCP Search
+              does not assign or change the scanner IP.
+            </li>
+            <li>
+              Check for a duplicate IP. Two devices must never share the same
+              address.
+            </li>
+            <li>
+              Verify the subnet mask/default gateway and VLAN routing are
+              correct for the approved site network.
+            </li>
+            <li>
+              From the BioStar server, verify the scanner is reachable and that
+              its configured device port is accessible.
+            </li>
+            <li>
+              Verify the device communication port; the standard Suprema device
+              port is
+              <strong>51211</strong>.
+            </li>
+            <li>
+              If the scanner uses <strong>Device → Server</strong>, confirm it
+              points to the correct BioStar server and check the waiting-device
+              workflow.
+            </li>
+            <li>
+              If the device was already added directly in BioStar, use
+              <strong>Sync from BioStar</strong> in LOTO.
+            </li>
+            <li>
+              Use BioStar's own Device / Advanced Search when you need to
+              separate a BioStar/network issue from a LOTO UI issue.
+            </li>
+          </ol>
+
+          <h2 id="camera">8. Camera shows Disconnected</h2>
+          <ol class="steps">
+            <li>
+              Ping the Visionary camera and confirm its HTTP API port is
+              reachable.
+            </li>
+            <li>Verify the Human Count Endpoint spelling and method.</li>
+            <li>
+              Verify the people-count and fall-detection evaluation IDs exist on
+              the camera.
+            </li>
+            <li>
+              Open Log Viewer and check for camera connection or request errors.
+            </li>
+          </ol>
+
+          <h2 id="layout">9. Floor plan not shown on Monitoring</h2>
+          <ol class="steps">
+            <li>
+              Confirm a floor plan has been uploaded and is marked
+              <strong>Active</strong>.
+            </li>
+            <li>
+              Confirm the selected theme is supported by the floor plan (Light,
+              Dark, or Both).
+            </li>
+            <li>
+              Confirm the required gates have been placed on the active floor
+              plan.
+            </li>
+            <li>
+              Refresh Monitoring if the latest layout changes are not shown
+              immediately.
+            </li>
+          </ol>
+
+          <h2 id="workers">10. Worker count is wrong</h2>
+          <ol class="steps">
+            <li>
+              Use Access Event Historian to review the worker's ENTER and EXIT
+              sequence.
+            </li>
+            <li>
+              Check whether the worker entered through one gate and exited
+              through another before making any manual correction.
+            </li>
+            <li>
+              An authorized user can use <strong>Tag Out</strong> to correct an
+              active worker state when operationally appropriate.
+            </li>
+            <li>
+              Remember that manual Gate Open/Close operations do not change the
+              worker count.
+            </li>
+          </ol>
+
+          <h2 id="support">11. What to collect for SICK support</h2>
+          <ol class="steps">
+            <li>
+              Record the exact time of the issue and the affected Gate, worker,
+              or device.
+            </li>
+            <li>
+              Capture a screenshot of Monitoring and the affected Gate, Gateway,
+              or Camera Details.
+            </li>
+            <li>Record the relevant Access Event Historian entry.</li>
+            <li>
+              Download the Log Viewer output covering the time of the issue.
+            </li>
+            <li>
+              Record whether the problem can be reproduced and what physical
+              state was observed.
+            </li>
+          </ol>
+          <footer class="footer">
+            <strong>AI LOTO Monitoring</strong> · System v2.0.0 · End-User
+            Manual v1.0.0 · SICK.
+          </footer>
+        </article>
+      </main>
+    </div>
+    <script src="assets/js/manual.js"></script>
+  </body>
+</html>

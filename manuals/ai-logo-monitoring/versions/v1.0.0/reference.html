@@ -1,0 +1,362 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="Reference &amp; Glossary" />
+    <title>Reference &amp; Glossary — AI LOTO Monitoring</title>
+    <link rel="stylesheet" href="assets/css/manual.css" />
+  </head>
+  <body data-page="reference.html">
+    <div class="layout">
+      <aside class="sidebar">
+        <div class="brand">
+          <img src="assets/images/sick-logo-blue.svg" alt="SICK" />
+          <h1>AI LOTO Monitoring</h1>
+          <p>
+            End-User Manual · v1.0.0<br />Supported system · v2.0.0<br />SICK
+          </p>
+        </div>
+        <nav class="nav">
+          <div class="nav-group">Start here</div>
+          <a href="index.html" data-current="index.html"
+            >Overview &amp; Quick Start</a
+          >
+          <div class="nav-group">Operate the system</div>
+          <a href="operations.html" data-current="operations.html"
+            >How AI LOTO Operates</a
+          >
+          <a href="monitoring.html" data-current="monitoring.html"
+            >Monitoring &amp; History</a
+          >
+          <div class="nav-group">Configure the system</div>
+          <a href="configuration.html" data-current="configuration.html"
+            >System Configuration</a
+          >
+          <a href="biostar2.html" data-current="biostar2.html"
+            >BioStar 2 Integration</a
+          >
+          <div class="nav-group">Administration</div>
+          <a href="administration.html" data-current="administration.html"
+            >Users, Roles &amp; Settings</a
+          >
+          <div class="nav-group">Panel reference</div>
+          <a href="panels.html" data-current="panels.html">Panel A / B / C</a>
+          <div class="nav-group">Support</div>
+          <a href="troubleshooting.html" data-current="troubleshooting.html"
+            >Troubleshooting</a
+          >
+          <a href="reference.html" data-current="reference.html"
+            >Reference &amp; Glossary</a
+          >
+        </nav>
+      </aside>
+      <main class="main">
+        <header class="topbar">
+          <button id="mobileMenu" class="mobile-menu">☰ Menu</button>
+          <div class="title">Reference &amp; Glossary</div>
+        </header>
+        <article class="content">
+          <h1>Reference & Glossary</h1>
+          <h2 id="status">1. Runtime state glossary</h2>
+          <div class="table-wrap">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Term</th>
+                  <th>Meaning</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>TAG_IN / IN</td>
+                  <td>
+                    Accepted authentication when the worker has no active inside
+                    state.
+                  </td>
+                </tr>
+                <tr>
+                  <td>TAG_OUT / OUT</td>
+                  <td>
+                    Accepted authentication when the worker is already active
+                    inside.
+                  </td>
+                </tr>
+                <tr>
+                  <td>OPENING / CLOSING</td>
+                  <td>Physical gate transition is in progress.</td>
+                </tr>
+                <tr>
+                  <td>FAULT</td>
+                  <td>Gate command failed and requires investigation/retry.</td>
+                </tr>
+                <tr>
+                  <td>Connected</td>
+                  <td>Device/gateway is responding.</td>
+                </tr>
+                <tr>
+                  <td>Disconnected</td>
+                  <td>
+                    Communication currently failing but failure threshold may
+                    not yet be reached.
+                  </td>
+                </tr>
+                <tr>
+                  <td>Unavailable</td>
+                  <td>
+                    Device/source is unavailable according to current health
+                    logic.
+                  </td>
+                </tr>
+                <tr>
+                  <td>System Trust GOOD</td>
+                  <td>
+                    Required monitoring sources are sufficiently
+                    available/current.
+                  </td>
+                </tr>
+                <tr>
+                  <td>System Trust NG</td>
+                  <td>Required source availability is degraded.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <h2 id="pins">2. SIG300 pin mapping used by the software</h2>
+          <div class="table-wrap">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Pin</th>
+                  <th>REST process-data field</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Pin 2</td>
+                  <td><code>iqValue</code></td>
+                </tr>
+                <tr>
+                  <td>Pin 4</td>
+                  <td><code>cqValue</code></td>
+                </tr>
+                <tr>
+                  <td>Pin 5</td>
+                  <td><code>iq5Value</code></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            Gateway process data is read/written at the SIG300 IO-Link REST path
+            for the configured master port. The user interface handles this
+            mapping; operators normally work with Port, Pin, Direction and
+            Function.
+          </p>
+          <h2 id="defaults">3. Important defaults</h2>
+          <div class="table-wrap">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Item</th>
+                  <th>Default / current baseline</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>BioStar event debounce</td>
+                  <td>1000 ms</td>
+                </tr>
+                <tr>
+                  <td>People count polling</td>
+                  <td>1000 ms</td>
+                </tr>
+                <tr>
+                  <td>Fall ON persistence</td>
+                  <td>1000 ms</td>
+                </tr>
+                <tr>
+                  <td>Fall OFF persistence</td>
+                  <td>5000 ms</td>
+                </tr>
+                <tr>
+                  <td>Gateway failures before unavailable</td>
+                  <td>3</td>
+                </tr>
+                <tr>
+                  <td>Gateway retry delay</td>
+                  <td>1000 ms</td>
+                </tr>
+                <tr>
+                  <td>Gateway output default</td>
+                  <td>OFF / false</td>
+                </tr>
+                <tr>
+                  <td>Manual gate command timeout</td>
+                  <td>15000 ms in supplied runtime environment baseline</td>
+                </tr>
+                <tr>
+                  <td>BioStar-triggered gate retry attempts</td>
+                  <td>3</td>
+                </tr>
+                <tr>
+                  <td>Retention period</td>
+                  <td>365 days</td>
+                </tr>
+                <tr>
+                  <td>Site timezone</td>
+                  <td>Asia/Seoul</td>
+                </tr>
+                <tr>
+                  <td>
+                    Suprema direct device port commonly used by TCP Search
+                  </td>
+                  <td>51211</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <h2 id="roles">4. Admin / Viewer quick matrix</h2>
+          <div class="table-wrap">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Function</th>
+                  <th>Admin</th>
+                  <th>Viewer (default)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Monitoring / histories / detail views</td>
+                  <td>Yes</td>
+                  <td>Yes</td>
+                </tr>
+                <tr>
+                  <td>Gate Open / Close</td>
+                  <td>Yes</td>
+                  <td>Yes</td>
+                </tr>
+                <tr>
+                  <td>
+                    Create/Edit/Delete gateways/gates/cameras/access devices
+                  </td>
+                  <td>Yes</td>
+                  <td>No</td>
+                </tr>
+                <tr>
+                  <td>User Management</td>
+                  <td>Yes</td>
+                  <td>Hidden / no access</td>
+                </tr>
+                <tr>
+                  <td>Shopfloor Layout</td>
+                  <td>Yes</td>
+                  <td>Hidden / no access</td>
+                </tr>
+                <tr>
+                  <td>BioStar 2 User Management</td>
+                  <td>Yes</td>
+                  <td>Hidden / no access</td>
+                </tr>
+                <tr>
+                  <td>Settings changes</td>
+                  <td>Yes</td>
+                  <td>Settings page hidden; basic GET permission only</td>
+                </tr>
+                <tr>
+                  <td>Roles & Permissions</td>
+                  <td>Yes</td>
+                  <td>Hidden / no access</td>
+                </tr>
+                <tr>
+                  <td>Log Viewer</td>
+                  <td>Yes</td>
+                  <td>Yes</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <h2 id="safety">5. Safety status quick reference</h2>
+          <div class="table-wrap">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Status</th>
+                  <th>Interpretation</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>SAFE</td>
+                  <td>
+                    No registered/AI-detected people, all gates closed, trusted
+                    sources available, no active fall/mismatch/transition/fault.
+                  </td>
+                </tr>
+                <tr>
+                  <td>WARNING</td>
+                  <td>
+                    Workers are inside and registered count equals AI count,
+                    with required source data available.
+                  </td>
+                </tr>
+                <tr>
+                  <td>UNSAFE</td>
+                  <td>
+                    Camera/Alarm gateway unavailable, gate state unknown, AI
+                    detects more people than registered, or a gate fault exists.
+                  </td>
+                </tr>
+                <tr>
+                  <td>UNKNOWN</td>
+                  <td>Current facts cannot be classified yet.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <h2 id="auth">6. Authentication methods</h2>
+          <ul>
+            <li>
+              <strong>Fingerprint</strong> — BioStar event type contains
+              FINGERPRINT.
+            </li>
+            <li><strong>Face</strong> — event type contains FACE.</li>
+            <li>
+              <strong>NFC</strong> — card/NFC success event; internally
+              classified as CARD.
+            </li>
+            <li>
+              <strong>Unknown</strong> — accepted success event whose credential
+              family is not recognized.
+            </li>
+          </ul>
+          <h2 id="ownership">7. Source-of-truth boundaries</h2>
+          <div class="grid2">
+            <div class="card">
+              <h3>BioStar 2</h3>
+              <p>
+                Worker users, biometric/card credentials, physical access-device
+                registration/advanced settings.
+              </p>
+            </div>
+            <div class="card">
+              <h3>AI LOTO</h3>
+              <p>
+                Access-device-to-gate reference, active worker presence, access
+                event history, gate state machine, gateway pin mapping,
+                Visionary configuration, shopfloor layout and site safety
+                status.
+              </p>
+            </div>
+          </div>
+          <footer class="footer">
+            <strong>AI LOTO Monitoring</strong> · System v2.0.0 · End-User
+            Manual v1.0.0 · SICK.
+          </footer>
+        </article>
+      </main>
+    </div>
+    <script src="assets/js/manual.js"></script>
+  </body>
+</html>

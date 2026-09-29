@@ -1,0 +1,476 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="BioStar 2 Integration" />
+    <title>BioStar 2 Integration — AI LOTO Monitoring</title>
+    <link rel="stylesheet" href="assets/css/manual.css" />
+  </head>
+  <body data-page="biostar2.html">
+    <div class="layout">
+      <aside class="sidebar">
+        <div class="brand">
+          <img src="assets/images/sick-logo-blue.svg" alt="SICK" />
+          <h1>AI LOTO Monitoring</h1>
+          <p>
+            End-User Manual · v1.0.0<br />Supported system · v2.0.0<br />SICK
+          </p>
+        </div>
+        <nav class="nav">
+          <div class="nav-group">Start here</div>
+          <a href="index.html" data-current="index.html"
+            >Overview &amp; Quick Start</a
+          >
+          <div class="nav-group">Operate the system</div>
+          <a href="operations.html" data-current="operations.html"
+            >How AI LOTO Operates</a
+          >
+          <a href="monitoring.html" data-current="monitoring.html"
+            >Monitoring &amp; History</a
+          >
+          <div class="nav-group">Configure the system</div>
+          <a href="configuration.html" data-current="configuration.html"
+            >System Configuration</a
+          >
+          <a href="biostar2.html" data-current="biostar2.html"
+            >BioStar 2 Integration</a
+          >
+          <div class="nav-group">Administration</div>
+          <a href="administration.html" data-current="administration.html"
+            >Users, Roles &amp; Settings</a
+          >
+          <div class="nav-group">Panel reference</div>
+          <a href="panels.html" data-current="panels.html">Panel A / B / C</a>
+          <div class="nav-group">Support</div>
+          <a href="troubleshooting.html" data-current="troubleshooting.html"
+            >Troubleshooting</a
+          >
+          <a href="reference.html" data-current="reference.html"
+            >Reference &amp; Glossary</a
+          >
+        </nav>
+      </aside>
+      <main class="main">
+        <header class="topbar">
+          <button id="mobileMenu" class="mobile-menu">☰ Menu</button>
+          <div class="title">BioStar 2 Integration</div>
+        </header>
+        <article class="content">
+          <h1>BioStar 2 Integration & User Enrollment</h1>
+          <p class="lead">
+            BioStar 2 is the source of truth for worker users, credentials and
+            physical access devices. AI LOTO uses server-side BioStar
+            credentials to receive events, synchronize access-device references
+            and embed the BioStar User page.
+          </p>
+          <h2 id="prepare">1. Prepare BioStar 2 for LOTO</h2>
+          <ol class="steps">
+            <li>
+              Install/start BioStar 2 and confirm its Web/API service is
+              reachable from the AI LOTO server.
+            </li>
+            <li>
+              Prepare each Suprema fingerprint/face/card scanner on the network:
+              assign its approved unique IP configuration and confirm the
+              BioStar server can reach its device port (normally 51211 for
+              Server → Device). The scanner can then be searched and registered
+              from LOTO Gate Access Device Management; it does not have to be
+              manually pre-created in BioStar when using this workflow.
+            </li>
+            <li>
+              Ensure BioStar successful authentication events are available
+              through the configured real-time WebSocket endpoint.
+            </li>
+            <li>
+              Use a BioStar account with sufficient rights for the LOTO
+              integration tasks (session creation, user page, device
+              operations).
+            </li>
+            <li>
+              In AI LOTO <strong>Settings → BioStar2 Server</strong>, configure
+              the REST Base URL, browser-facing Web URL, WebSocket URL, Login ID
+              and Login Password.
+            </li>
+            <li>
+              For an on-premise installation using a trusted
+              internal/self-signed certificate, enable
+              <strong>Allow Self-Signed Certificate</strong> only when approved
+              for that deployment.
+            </li>
+            <li>
+              Save, then open <strong>BioStar 2 User Management</strong> in LOTO
+              to validate the embedded session.
+            </li>
+          </ol>
+          <div class="callout">
+            <strong>Embedded page architecture</strong>The browser does not
+            receive the BioStar administrator password. LOTO's backend
+            authenticates to BioStar, creates a session and proxies the embedded
+            Web UI. If the embedded page cannot load, verify the Base/Web URLs,
+            credentials, certificate setting and reverse-proxy/network path.
+          </div>
+          <h2 id="settings">2. BioStar settings in LOTO</h2>
+          <figure class="figure">
+            <img
+              loading="lazy"
+              src="assets/screenshots/settings-biostar.jpg"
+              alt="Settings — BioStar 2 REST/Web/WebSocket URLs, login credentials and self-signed-certificate option."
+            />
+            <figcaption>
+              Settings — BioStar 2 REST/Web/WebSocket URLs, login credentials
+              and self-signed-certificate option.
+            </figcaption>
+          </figure>
+          <div class="table-wrap">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Setting</th>
+                  <th>Purpose</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>BioStar2 Base URL</td>
+                  <td>REST API server URL used by the backend.</td>
+                </tr>
+                <tr>
+                  <td>BioStar2 Web URL</td>
+                  <td>
+                    Browser-facing BioStar Web UI URL used by the embedded
+                    management feature and “Open in BioStar”.
+                  </td>
+                </tr>
+                <tr>
+                  <td>BioStar2 WebSocket URL</td>
+                  <td>
+                    Real-time event endpoint used to receive
+                    access/authentication events.
+                  </td>
+                </tr>
+                <tr>
+                  <td>BioStar2 Login ID / Password</td>
+                  <td>Integration account used server-side by AI LOTO.</td>
+                </tr>
+                <tr>
+                  <td>Allow Self-Signed Certificate</td>
+                  <td>
+                    Lets backend HTTPS calls accept a self-signed BioStar
+                    certificate.
+                  </td>
+                </tr>
+                <tr>
+                  <td>BioStar Event Debounce Window</td>
+                  <td>
+                    Suppresses rapid duplicate events from the same user/device.
+                    Default 1000 ms.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <h2 id="users">3. Create a BioStar worker from the LOTO UI</h2>
+          <p>
+            Admin users can open <strong>BioStar 2 User Management</strong> in
+            the LOTO sidebar. The embedded BioStar page opens directly to the
+            BioStar user list using a backend-created session, so a second
+            manual BioStar login is normally not required.
+          </p>
+          <figure class="figure">
+            <img
+              loading="lazy"
+              src="assets/screenshots/biostar-users-list.jpg"
+              alt="BioStar 2 User Management embedded inside AI LOTO."
+            />
+            <figcaption>
+              BioStar 2 User Management embedded inside AI LOTO.
+            </figcaption>
+          </figure>
+          <ol class="steps">
+            <li>Open <strong>BioStar 2 User Management</strong>.</li>
+            <li>
+              Click <strong>Add User</strong> inside the embedded BioStar UI.
+            </li>
+            <li>
+              Enter the worker's BioStar user name with format <strong>"User Name_Team Name_Phone Number"</strong> and other required
+              identity information.
+            </li>
+            <li>
+              In the Credential area, enroll the required credential:
+              fingerprint, visual face and/or card/NFC according to the Suprema
+              device in use.
+            </li>
+            <li>
+              Apply/save the BioStar user. If BioStar user synchronization is
+              configured, confirm the user is synchronized to the intended
+              access device(s).
+            </li>
+            <li>
+              Perform a controlled authentication at the assigned gate and
+              confirm the event appears in LOTO Access Event Historian.
+            </li>
+          </ol>
+          <figure class="figure">
+            <img
+              loading="lazy"
+              src="assets/screenshots/biostar-user-new.jpg"
+              alt="BioStar Add User form shown through the embedded page."
+            />
+            <figcaption>
+              BioStar Add User form shown through the embedded page.
+            </figcaption>
+          </figure>
+          <figure class="figure">
+            <img
+              loading="lazy"
+              src="assets/screenshots/biostar-user-credential.jpg"
+              alt="BioStar user credential area. Credential options depend on the registered Suprema device and BioStar configuration."
+            />
+            <figcaption>
+              BioStar user credential area. Credential options depend on the
+              registered Suprema device and BioStar configuration.
+            </figcaption>
+          </figure>
+          <div class="callout warn">
+            <strong>LOTO does not own worker credentials</strong>Fingerprint
+            templates, face data and card credentials are managed by BioStar 2.
+            LOTO records accepted access events and worker presence; it does not
+            replicate the full BioStar user/credential database.
+          </div>
+          <h3>Official Suprema guidance</h3>
+          <div class="card external-links">
+            <ul>
+              <li>
+                <a
+                  href="https://support.supremainc.com/en/support/solutions/articles/24000077386-how-to-enroll-users"
+                  target="_blank"
+                  rel="noopener"
+                  >How to enroll users in BioStar 2</a
+                >
+              </li>
+              <li>
+                <a
+                  href="https://support.supremainc.com/en/support/solutions/articles/24000072989--new-features-in-biostar-2-v2-9-6"
+                  target="_blank"
+                  rel="noopener"
+                  >How to add fingerprint credential to a user</a
+                >
+              </li>
+              <li>
+                <a
+                  href="https://support.supremainc.com/en/support/solutions/articles/24000060147--biostar-2-how-to-enroll-visual-face-credential"
+                  target="_blank"
+                  rel="noopener"
+                  >How to enroll Visual Face credential</a
+                >
+              </li>
+              <li>
+                <a
+                  href="https://support.supremainc.com/en/support/solutions/articles/24000091098--biostar-2-api-how-to-enroll-a-card-and-assign-it-to-a-user"
+                  target="_blank"
+                  rel="noopener"
+                  >Card enrollment and user assignment</a
+                >
+              </li>
+            </ul>
+          </div>
+          <h2 id="accessdevices">
+            4. Connect and register a BioStar scan device from LOTO
+          </h2>
+          <p>
+            AI LOTO can commission the BioStar access-device reference directly
+            from <strong>Gate Access Device Management</strong>. For the normal
+            workflow, you only need the physical scanner's correct IP address
+            and device communication port. LOTO/BioStar determine the device
+            identity from the TCP search result.
+          </p>
+
+          <h3>4.1 Network preparation</h3>
+          <div class="callout warn">
+            <strong>The scanner must already have the correct IP</strong>LOTO's
+            TCP Search does not change the scanner's IP address. Configure the
+            scanner's network settings first using the approved site network
+            plan or an appropriate Suprema/BioStar commissioning method.
+          </div>
+          <div class="table-wrap">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Item</th>
+                  <th>What to check</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Scanner IP</td>
+                  <td>
+                    Use the IP assigned to the physical Suprema scanner. Do not
+                    enter the BioStar server or LOTO server IP.
+                  </td>
+                </tr>
+                <tr>
+                  <td>Uniqueness</td>
+                  <td>
+                    The IP must not duplicate another device on the network.
+                  </td>
+                </tr>
+                <tr>
+                  <td>Subnet / routing</td>
+                  <td>
+                    BioStar 2 must be able to route to the scanner. Use the
+                    correct subnet mask and default gateway for the site's
+                    network design.
+                  </td>
+                </tr>
+                <tr>
+                  <td>Address stability</td>
+                  <td>
+                    Use a static IP or approved DHCP reservation for production
+                    so the scanner address remains predictable.
+                  </td>
+                </tr>
+                <tr>
+                  <td>Device port</td>
+                  <td>
+                    The standard Suprema device port is <strong>51211</strong>.
+                    Enter a different port only if the scanner was deliberately
+                    configured to use one.
+                  </td>
+                </tr>
+                <tr>
+                  <td>Connection mode</td>
+                  <td>
+                    The normal LOTO direct TCP-search workflow uses
+                    <strong>Server → Device</strong>. BioStar initiates the
+                    connection to the scanner.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3>4.2 Register the scanner</h3>
+          <ol class="steps">
+            <li>Open <strong>Gate Access Device Management</strong>.</li>
+            <li>Click <strong>New</strong>.</li>
+            <li>Enter the scanner's exact <strong>IP Address</strong>.</li>
+            <li>
+              Confirm the <strong>Port</strong>; normally
+              <strong>51211</strong>.
+            </li>
+            <li>
+              Click <strong>TCP Search</strong>. This asks BioStar 2 to search
+              that exact IP/port.
+            </li>
+            <li>
+              Select the detected device from the result list. The BioStar
+              Device ID and other detected metadata are populated from BioStar.
+            </li>
+            <li>Review the BioStar name.</li>
+            <li>
+              Optionally select the LOTO <strong>Gate</strong>. Leave
+              <strong>No gate</strong> if the gate will be configured later.
+            </li>
+            <li>
+              Keep <strong>Enabled</strong> selected for a scanner used in
+              normal operation.
+            </li>
+            <li>
+              Click <strong>Save</strong>. LOTO registers the device in BioStar
+              2 when required and automatically creates/updates the local Access
+              Device record.
+            </li>
+            <li>
+              Confirm the device appears in the list and becomes
+              <strong>Connected</strong>. Finally, verify that it is mapped to
+              the intended Gate.
+            </li>
+          </ol>
+          <figure class="figure focus">
+            <img
+              loading="lazy"
+              src="assets/screenshots/access-device-new.jpg"
+              alt="Gate Access Device registration — exact IP and port with TCP Search."
+            />
+            <figcaption>
+              Gate Access Device registration — enter the physical scanner's
+              exact IP and port, then use TCP Search.
+            </figcaption>
+          </figure>
+
+          <h3>4.3 If Device → Server is intentionally used</h3>
+          <p>
+            BioStar 2 also supports <strong>Device → Server</strong>. In that
+            topology, the scanner initiates the connection to BioStar and must
+            be configured with the correct BioStar server address/port. Such a
+            device can appear under the waiting-device workflow. Use this mode
+            only when it is part of the approved network design; the standard
+            LOTO direct-registration instructions above assume Server → Device.
+          </p>
+
+          <h3>4.4 Synchronize a device already added in BioStar</h3>
+          <p>
+            If a scanner was registered directly in BioStar 2, use
+            <strong>Sync from BioStar</strong> on Gate Access Device Management.
+            LOTO matches devices by BioStar Device ID and creates/updates the
+            local reference without requiring manual copying of that ID.
+          </p>
+
+          <h3>Official Suprema device-connection guidance</h3>
+          <div class="card external-links">
+            <ul>
+              <li>
+                <a
+                  href="https://support.supremainc.com/en/support/solutions/articles/24000075522--biostar-2-how-to-add-devices"
+                  target="_blank"
+                  rel="noopener"
+                  >BioStar 2 — How to add devices</a
+                >
+              </li>
+              <li>
+                <a
+                  href="https://support.supremainc.com/en/support/solutions/articles/24000005909--biostar-2-server-and-device-port-usage"
+                  target="_blank"
+                  rel="noopener"
+                  >BioStar 2 — Server and device port usage</a
+                >
+              </li>
+              <li>
+                <a
+                  href="https://support.supremainc.com/en/support/solutions/articles/24000007206"
+                  target="_blank"
+                  rel="noopener"
+                  >BioStar 2 — Connection modes and troubleshooting</a
+                >
+              </li>
+            </ul>
+          </div>
+          <h2 id="event">5. What LOTO expects from BioStar events</h2>
+          <ul>
+            <li>
+              Successful event type in the IDENTIFY_SUCCESS… or VERIFY_SUCCESS…
+              families.
+            </li>
+            <li>A valid BioStar user ID.</li>
+            <li>
+              A valid BioStar device ID that maps to a local Access Device.
+            </li>
+            <li>The Access Device is assigned to a LOTO Gate.</li>
+          </ul>
+          <p>
+            Authentication method is classified from the event name:
+            Fingerprint, Face or Card/NFC. Events that do not meet the
+            accepted-success pattern are not treated as worker IN/OUT
+            transitions.
+          </p>
+          <footer class="footer">
+            <strong>AI LOTO Monitoring</strong> · System v2.0.0 · End-User
+            Manual v1.0.0 · SICK.
+          </footer>
+        </article>
+      </main>
+    </div>
+    <script src="assets/js/manual.js"></script>
+  </body>
+</html>

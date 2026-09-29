@@ -1,0 +1,848 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="System Configuration" />
+    <title>System Configuration — AI LOTO Monitoring</title>
+    <link rel="stylesheet" href="assets/css/manual.css" />
+  </head>
+  <body data-page="configuration.html">
+    <div class="layout">
+      <aside class="sidebar">
+        <div class="brand">
+          <img src="assets/images/sick-logo-blue.svg" alt="SICK" />
+          <h1>AI LOTO Monitoring</h1>
+          <p>
+            End-User Manual · v1.0.0<br />Supported system · v2.0.0<br />SICK
+          </p>
+        </div>
+        <nav class="nav">
+          <div class="nav-group">Start here</div>
+          <a href="index.html" data-current="index.html"
+            >Overview &amp; Quick Start</a
+          >
+          <div class="nav-group">Operate the system</div>
+          <a href="operations.html" data-current="operations.html"
+            >How AI LOTO Operates</a
+          >
+          <a href="monitoring.html" data-current="monitoring.html"
+            >Monitoring &amp; History</a
+          >
+          <div class="nav-group">Configure the system</div>
+          <a href="configuration.html" data-current="configuration.html"
+            >System Configuration</a
+          >
+          <a href="biostar2.html" data-current="biostar2.html"
+            >BioStar 2 Integration</a
+          >
+          <div class="nav-group">Administration</div>
+          <a href="administration.html" data-current="administration.html"
+            >Users, Roles &amp; Settings</a
+          >
+          <div class="nav-group">Panel reference</div>
+          <a href="panels.html" data-current="panels.html">Panel A / B / C</a>
+          <div class="nav-group">Support</div>
+          <a href="troubleshooting.html" data-current="troubleshooting.html"
+            >Troubleshooting</a
+          >
+          <a href="reference.html" data-current="reference.html"
+            >Reference &amp; Glossary</a
+          >
+        </nav>
+      </aside>
+      <main class="main">
+        <header class="topbar">
+          <button id="mobileMenu" class="mobile-menu">☰ Menu</button>
+          <div class="title">System Configuration</div>
+        </header>
+        <article class="content">
+          <h1>System Configuration</h1>
+          <p class="lead">
+            For a new installation, configure hardware references in this order:
+            Gateway Devices → Gate Access Devices → Gates → Cameras → Shopfloor
+            Layout → Settings validation.
+          </p>
+          <div class="callout warn">
+            <strong>Before editing</strong>Configuration changes affect gate
+            control and alarm behavior. Perform them during a controlled
+            commissioning/maintenance window and verify physical I/O before
+            normal operation.
+          </div>
+          <h2 id="gateway">1. Gateway Device Management</h2>
+          <p>
+            Add one record for each SIG300 used by AI LOTO. Choose the role
+            correctly:
+          </p>
+          <ul>
+            <li>
+              <strong>Gate Control</strong> — drives FlexLock and MB1 Sol and
+              reads FlexLock AUX.
+            </li>
+            <li>
+              <strong>Alarm</strong> — drives Green, Orange, Red, Fall and
+              Mismatch outputs.
+            </li>
+          </ul>
+          <figure class="figure">
+            <img
+              loading="lazy"
+              src="assets/screenshots/gateway-list.jpg"
+              alt="Gateway Device Management list. Connection and pin assignment states can be inspected from the table."
+            />
+            <figcaption>
+              Gateway Device Management list. Connection and pin assignment
+              states can be inspected from the table.
+            </figcaption>
+          </figure>
+          <h3>Add a Gateway</h3>
+          <ol class="steps">
+            <li>Click <strong>New</strong>.</li>
+            <li>
+              Enter a friendly <strong>Name</strong> and the SIG300
+              <strong>IP Address</strong>.
+            </li>
+            <li>
+              Select <strong>Gate Control</strong> or <strong>Alarm</strong>.
+            </li>
+            <li>
+              For an Alarm gateway, map the logical alarm functions to the
+              appropriate available pins.
+            </li>
+            <li>
+              Save and wait for the gateway to initialize. Confirm the status
+              becomes Connected.
+            </li>
+          </ol>
+          <figure class="figure focus">
+            <img
+              loading="lazy"
+              src="assets/screenshots/gateway-edit.jpg"
+              alt="Gateway control drawer."
+            />
+            <figcaption>Gateway add/edit drawer.</figcaption>
+          </figure>
+          <figure class="figure focus">
+            <img
+              loading="lazy"
+              src="assets/screenshots/gateway-alarm.png"
+              alt="Gateway alarm drawer."
+            />
+            <figcaption>Gateway alarm drawer.</figcaption>
+          </figure>
+          <h3>Supported SIG300 pins</h3>
+          <div class="table-wrap">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Port</th>
+                  <th>Usable DIO pins in this application</th>
+                  <th>Process-data field</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>P1–P4</td>
+                  <td>Pin 2, Pin 4</td>
+                  <td>Pin 2 = iqValue; Pin 4 = cqValue</td>
+                </tr>
+                <tr>
+                  <td>P5–P6</td>
+                  <td>Pin 2, Pin 4, Pin 5</td>
+                  <td>Pin 2 = iqValue; Pin 4 = cqValue; Pin 5 = iq5Value</td>
+                </tr>
+                <tr>
+                  <td>P7–P8</td>
+                  <td>Pin 4</td>
+                  <td>Pin 4 = cqValue</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            The UI rejects unsupported port/pin combinations, function/direction
+            mismatches and duplicate assignments. A physical pin can have one
+            assignment only.
+          </p>
+          <h3>Pin function meanings</h3>
+          <div class="table-wrap">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Function</th>
+                  <th>Direction</th>
+                  <th>Purpose</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Gate FlexLock Output</td>
+                  <td>DO</td>
+                  <td>Controls FlexLock lock/unlock signal.</td>
+                </tr>
+                <tr>
+                  <td>Gate FlexLock AUX Input</td>
+                  <td>DI</td>
+                  <td>Physical feedback used by the gate state machine.</td>
+                </tr>
+                <tr>
+                  <td>Gate MB1 Sol Output</td>
+                  <td>DO</td>
+                  <td>Controls MB1 Sol actuator output.</td>
+                </tr>
+                <tr>
+                  <td>Alarm Green / Orange / Red / Fall / Mismatch</td>
+                  <td>DO</td>
+                  <td>Site Safety logical outputs on an Alarm gateway.</td>
+                </tr>
+                <tr>
+                  <td>Unassigned</td>
+                  <td>—</td>
+                  <td>Not managed by Site Safety.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <figure class="figure focus">
+            <img
+              loading="lazy"
+              src="assets/screenshots/gateway-details.jpg"
+              alt="Gateway Details shows connection, initialization, failures and current pin states."
+            />
+            <figcaption>
+              Gateway Details shows connection, initialization, failures and
+              current pin states.
+            </figcaption>
+          </figure>
+          <h2 id="access-device">2. Gate Access Device Management</h2>
+          <p>
+            This page connects a physical Suprema/BioStar scanner to BioStar 2
+            and creates the local Access Device reference used by AI LOTO. For
+            the normal commissioning workflow, enter the scanner's exact network
+            address and use <strong>TCP Search</strong>. You do not need to
+            manually type the BioStar Device ID or Device Type ID.
+          </p>
+          <figure class="figure">
+            <img
+              loading="lazy"
+              src="assets/screenshots/access-devices-list.jpg"
+              alt="Gate Access Device Management."
+            />
+            <figcaption>
+              Gate Access Device Management — registered BioStar devices,
+              connection state and Gate assignment.
+            </figcaption>
+          </figure>
+
+          <h3>Before registering a scanner</h3>
+          <div class="callout warn">
+            <strong>Assign the scanner IP correctly first</strong>The TCP Search
+            function searches the exact IP address that you enter; it does not
+            assign or repair the scanner's network address. Confirm the scanner
+            already has the approved site IP configuration before registering it
+            in LOTO.
+          </div>
+          <ul>
+            <li>
+              Use the
+              <strong>IP address assigned to the physical scanner</strong>, not
+              the BioStar server IP and not the LOTO server IP.
+            </li>
+            <li>
+              The address must be <strong>unique</strong>. Do not reuse an IP
+              already assigned to another scanner, camera, SIG300 or IPC.
+            </li>
+            <li>
+              Use the approved site network plan. Configure the correct subnet
+              mask and default gateway when routing between networks is
+              required.
+            </li>
+            <li>
+              For a stable industrial installation, use a fixed/static address
+              or an approved DHCP reservation so the scanner does not
+              unexpectedly receive a different IP later.
+            </li>
+            <li>
+              Confirm the BioStar 2 server can reach the scanner's IP. If the
+              server and scanner are on different VLANs/subnets, the required
+              routing/firewall rules must already exist.
+            </li>
+            <li>
+              For the standard <strong>Server → Device</strong> flow, the
+              scanner's device communication port is normally
+              <strong>51211</strong>. If the port was intentionally changed on
+              the scanner, enter that configured value instead.
+            </li>
+          </ul>
+
+          <h3>Register a new BioStar scanner from LOTO</h3>
+          <ol class="steps">
+            <li>
+              Open <strong>Gate Access Device Management</strong> and click
+              <strong>New</strong>.
+            </li>
+            <li>
+              In <strong>Network / Connection</strong>, enter the scanner's
+              exact <strong>IP Address</strong>.
+            </li>
+            <li>
+              Confirm the <strong>Port</strong>. The default Suprema device port
+              is <strong>51211</strong>.
+            </li>
+            <li>
+              Click <strong>TCP Search</strong>. LOTO asks BioStar 2 to search
+              that exact IP/port.
+            </li>
+            <li>
+              When a device is found, select it from the discovered-device
+              result. LOTO fills the authoritative BioStar Device ID and
+              available device metadata returned by BioStar.
+            </li>
+            <li>
+              Review the <strong>BioStar Name</strong>. Keep or adjust the
+              friendly name as needed.
+            </li>
+            <li>
+              Under <strong>LOTO Integration</strong>, optionally select the
+              Gate that uses this scanner. You may also leave
+              <strong>No gate</strong> and assign it later from Gate Management.
+            </li>
+            <li>
+              Keep <strong>Enabled</strong> selected for a device that should
+              participate in normal access-event processing.
+            </li>
+            <li>
+              Click <strong>Save</strong>. LOTO registers the detected device
+              with BioStar 2 when required and then creates/updates its local
+              Access Device reference.
+            </li>
+            <li>
+              After saving, confirm the device appears in the table and reaches
+              <strong>Connected</strong>. Then verify the correct Gate
+              assignment.
+            </li>
+          </ol>
+          <figure class="figure focus">
+            <img
+              loading="lazy"
+              src="assets/screenshots/access-device-new.jpg"
+              alt="Add Gate Access Device — enter the scanner IP and device port, then use TCP Search."
+            />
+            <figcaption>
+              Add Gate Access Device — standard commissioning uses the exact
+              scanner IP plus device port, then TCP Search.
+            </figcaption>
+          </figure>
+          <figure class="figure">
+            <img
+              loading="lazy"
+              src="assets/screenshots/access-devices-edit.png"
+              alt="Gate Access Device Management — edit drawer."
+            />
+            <figcaption>
+              Gate Access Device Management — edit drawer for a registered
+              BioStar device, showing connection state and Gate assignment.
+            </figcaption>
+          </figure>
+
+          <div class="callout">
+            <strong>What TCP Search does</strong>In the current application, the
+            backend asks BioStar 2 to perform an exact TCP search using the
+            entered scanner IP and port. After you select the detected result,
+            LOTO uses BioStar's returned device identity for registration. This
+            avoids manually copying or inventing a BioStar Device ID.
+          </div>
+
+          <h3>Connection mode</h3>
+          <p>
+            The standard direct IP/port workflow shown above uses
+            <strong>Server → Device</strong>, which is also BioStar 2's default
+            device-connection mode. In this mode, the BioStar server initiates
+            the connection to the scanner's device port (normally 51211). If the
+            installation intentionally uses <strong>Device → Server</strong>,
+            configure that topology according to the site/BioStar device setup;
+            such devices may first appear as waiting devices instead of being
+            commissioned through the normal direct TCP-search flow.
+          </p>
+
+          <h3>Existing devices and synchronization</h3>
+          <p>
+            <strong>Sync from BioStar</strong> imports BioStar devices that
+            already exist on the BioStar server and refreshes synchronized
+            metadata for existing matches.
+            <strong>Refresh from BioStar</strong> refreshes one device.
+            <strong>Remove from LOTO</strong> removes only the local LOTO
+            reference; it is blocked while the device is assigned to a Gate.
+          </p>
+          <figure class="figure focus">
+            <img
+              loading="lazy"
+              src="assets/screenshots/access-device-details.jpg"
+              alt="Access Device details and synchronized BioStar information."
+            />
+            <figcaption>
+              Access Device details — BioStar identity, network information,
+              connection state and Gate mapping.
+            </figcaption>
+          </figure>
+          <h2 id="gate">3. Gate Management</h2>
+          <p>
+            Each functional gate needs one Gate Control gateway, one BioStar
+            Access Device and three physical I/O mappings.
+          </p>
+          <figure class="figure">
+            <img
+              loading="lazy"
+              src="assets/screenshots/gates-list.jpg"
+              alt="Gate Management shows runtime state, FlexLock AUX and the two gate outputs."
+            />
+            <figcaption>
+              Gate Management shows runtime state, FlexLock AUX and the two gate
+              outputs.
+            </figcaption>
+          </figure>
+          <div class="table-wrap">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Gate signal</th>
+                  <th>Direction</th>
+                  <th>Required behavior</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>FlexLock DO</td>
+                  <td>DO</td>
+                  <td>
+                    OFF during open preparation; ON to finish close/lock
+                    sequence.
+                  </td>
+                </tr>
+                <tr>
+                  <td>FlexLock AUX</td>
+                  <td>DI</td>
+                  <td>
+                    Must become OFF before MB1 Sol is turned ON; must become ON
+                    before FlexLock is turned ON during close.
+                  </td>
+                </tr>
+                <tr>
+                  <td>MB1 Sol DO</td>
+                  <td>DO</td>
+                  <td>ON to complete opening; OFF to begin closing.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <h3>Create/edit a Gate</h3>
+          <ol class="steps">
+            <li>Enter the Gate name.</li>
+            <li>Select the Gate Control Gateway.</li>
+            <li>
+              Select the Gate Access Device. One local access device should be
+              assigned to only one Gate.
+            </li>
+            <li>Choose Port/Pin for FlexLock DO and its Startup Safe State.</li>
+            <li>Choose Port/Pin for FlexLock AUX. This is input-only.</li>
+            <li>Choose Port/Pin for MB1 Sol DO and its Startup Safe State.</li>
+            <li>
+              Save, then open Details and confirm all runtime/pin states are
+              sensible.
+            </li>
+          </ol>
+          <figure class="figure focus">
+            <img
+              loading="lazy"
+              src="assets/screenshots/gate-edit.jpg"
+              alt="Gate edit drawer with the three I/O mappings."
+            />
+            <figcaption>
+              Gate edit drawer with the three I/O mappings.
+            </figcaption>
+          </figure>
+          <figure class="figure focus">
+            <img
+              loading="lazy"
+              src="assets/screenshots/gate-details.jpg"
+              alt="Gate Details — devices, runtime state, AUX, outputs, failures and pin assignments."
+            />
+            <figcaption>
+              Gate Details — devices, runtime state, AUX, outputs, failures and
+              pin assignments.
+            </figcaption>
+          </figure>
+          <div class="callout">
+            <strong>Startup safe state</strong>The standard configuration
+            uses OFF/LOW for gate outputs. Change this only when the approved
+            wiring/control design requires a different state.
+          </div>
+          <h2 id="camera">4. Camera Management</h2>
+          <p>
+            Add every Visionary-B Two / AI-Assist camera used for people count
+            and fall detection. Configure the required camera fields first, then
+            register the camera in AI LOTO Monitoring.
+          </p>
+          <figure class="figure">
+            <img
+              loading="lazy"
+              src="assets/screenshots/cameras-list.jpg"
+              alt="Camera Management displays configured evaluation IDs, live people count and connection state."
+            />
+            <figcaption>
+              Camera Management displays configured evaluation IDs, live people
+              count and connection state.
+            </figcaption>
+          </figure>
+
+          <h3 id="visionary-prepare">4.1 Prepare the Visionary-B Two camera</h3>
+          <p>
+            Before adding the camera in AI LOTO Monitoring, make sure the camera
+            has a reachable, unique IP address and that its detection zones are
+            configured in the Visionary WebUI. The camera IP must not duplicate
+            the IPC, SIG300, access-device or another camera address.
+          </p>
+
+          <div class="callout warn">
+            <strong>Required AI-Assist application</strong>Before configuring
+            detection zones, open the Visionary-B Two Home page and verify the
+            Application software section. It must show AI-Assist. The
+            configuration shown in this manual uses AI-Assist version 2.0.2. If
+            AI-Assist is missing or a different version is not approved for the
+            project, install or update the camera application before continuing.
+          </div>
+          <figure class="figure">
+            <a
+              href="assets/screenshots/visionary-ai-assist-home.png"
+              target="_blank"
+              rel="noopener"
+              ><img
+                loading="lazy"
+                src="assets/screenshots/visionary-ai-assist-home.png"
+                alt="Visionary-B Two Home page showing AI-Assist version 2.0.2 under Application software."
+            /></a>
+            <figcaption>
+              <strong>Verify AI-Assist first.</strong> On the Home page, confirm
+              that <strong>Application software</strong> lists
+              <strong>AI-Assist</strong>. The supplied commissioning example
+              uses version <strong>2.0.2</strong>.
+            </figcaption>
+          </figure>
+
+          <h4>Step 1 — Tune person recognition</h4>
+          <ol class="steps">
+            <li>
+              Open the camera WebUI at
+              <span class="kbd">http://&lt;camera-ip&gt;/</span>.
+            </li>
+            <li>Go to <strong>Configuration → Object recognition</strong>.</li>
+            <li>
+              Under <strong>Persons</strong>, fine-tune the following parameters
+              for stable and reliable detection:
+              <ul>
+                <li>
+                  <strong>Recognition time</strong> — how long the object must
+                  satisfy the person criteria before it is accepted.
+                </li>
+                <li>
+                  <strong>Holding time</strong> — how long a detected person
+                  remains held after the detection condition disappears.
+                </li>
+                <li>
+                  <strong>Sensitivity</strong> — adjust only as needed to
+                  improve reliable person detection without causing unwanted
+                  detections.
+                </li>
+              </ul>
+            </li>
+            <li>
+              Use the live 3D view while commissioning and confirm standing and
+              walking persons are detected smoothly in the intended area.
+            </li>
+          </ol>
+          <figure class="figure">
+            <a
+              href="assets/screenshots/visionary-object-recognition.png"
+              target="_blank"
+              rel="noopener"
+              ><img
+                loading="lazy"
+                src="assets/screenshots/visionary-object-recognition.png"
+                alt="Visionary-B Two Object recognition page showing Persons recognition time, holding time and sensitivity."
+            /></a>
+            <figcaption>
+              <strong>Object recognition — Persons.</strong> Adjust
+              <strong>Recognition time</strong>,
+              <strong>Holding time</strong> and
+              <strong>Sensitivity</strong> during commissioning so person
+              detection is smooth and reliable for the actual installation.
+            </figcaption>
+          </figure>
+
+          <h4>
+            Step 2 — Create the People Detection Zone (<span class="kbd"
+              >Volume001</span
+            >
+            / Evaluation ID 1)
+          </h4>
+          <ol class="steps">
+            <li>Go to <strong>Application → Field evaluation</strong>.</li>
+            <li>
+              Create or open the field-evaluation group used for this camera.
+            </li>
+            <li>
+              Create the first evaluation for the normal people-detection area.
+            </li>
+            <li>Set <strong>Detected objects = Persons</strong>.</li>
+            <li>
+              Use this first evaluation as the LOTO people-detection volume
+              <span class="kbd">Volume001</span>.
+            </li>
+            <li>
+              Adjust the 3D field so it covers only the intended monitored area
+              for this camera.
+            </li>
+            <li>
+              Adjust <strong>Min. portion of a person in the field</strong> as
+              required by commissioning.
+            </li>
+          </ol>
+          <figure class="figure">
+            <a
+              href="assets/screenshots/visionary-field-eval-1.png"
+              target="_blank"
+              rel="noopener"
+              ><img
+                loading="lazy"
+                src="assets/screenshots/visionary-field-eval-1.png"
+                alt="Visionary-B Two Field evaluation showing Evaluation ID 1 for the People Detection Zone."
+            /></a>
+            <figcaption>
+              <strong>People Detection Zone — Volume001.</strong> Configure
+              <strong>Evaluation ID 1</strong> with
+              <strong>Detected objects = Persons</strong>. Fine-tune the
+              minimum-person-portion threshold and zone geometry for the real
+              monitored area.
+            </figcaption>
+          </figure>
+
+          <div class="callout warn">
+            <strong
+              >Do not overlap people-detection zones between cameras</strong
+            >
+            When multiple Visionary-B Two cameras are used, keep each camera's
+            <span class="kbd">Volume001</span> people-detection zone separate
+            from neighboring cameras. If two camera zones overlap, the same
+            person can be detected by both cameras and counted twice. AI LOTO
+            Monitoring does not perform cross-camera person de-duplication.
+          </div>
+
+          <h4>
+            Step 3 — Create the People Falling Zone (<span class="kbd"
+              >Volume002</span
+            >
+            / Evaluation ID 2)
+          </h4>
+          <ol class="steps">
+            <li>
+              In the same <strong>Application → Field evaluation</strong> group,
+              add a second evaluation.
+            </li>
+            <li>Set <strong>Detected objects = Persons</strong>.</li>
+            <li>
+              Use this second evaluation as the LOTO fall-detection volume
+              <span class="kbd">Volume002</span>.
+            </li>
+            <li>
+              Position and size the field close to floor level so a fallen
+              person can infringe it while normal standing/walking activity does
+              not normally activate it.
+            </li>
+            <li>
+              Adjust <strong>Min. portion of a person in the field</strong> as
+              required.
+            </li>
+            <li>
+              Validate the field using controlled commissioning tests before
+              releasing the system for normal operation.
+            </li>
+          </ol>
+          <figure class="figure">
+            <a
+              href="assets/screenshots/visionary-field-eval-2.png"
+              target="_blank"
+              rel="noopener"
+              ><img
+                loading="lazy"
+                src="assets/screenshots/visionary-field-eval-2.png"
+                alt="Visionary-B Two Field evaluation showing Evaluation ID 2 for the People Falling Zone."
+            /></a>
+            <figcaption>
+              <strong>People Falling Zone — Volume002.</strong> Configure
+              <strong>Evaluation ID 2</strong> with
+              <strong>Detected objects = Persons</strong>. The falling zone is
+              normally positioned low in the monitored area and must be verified
+              by controlled site testing.
+            </figcaption>
+          </figure>
+
+          <div class="callout warn">
+            <strong>Commission the camera on the real shopfloor</strong>The
+            exact zone geometry and parameter values depend on installation
+            height, camera angle, working area and site behavior. Validate
+            standing, walking, crouching and controlled fall scenarios, and
+            fine-tune Recognition time, Holding time, Sensitivity and Min.
+            portion of a person in the field until detection is reliable.
+          </div>
+
+          <h3>4.2 Register the camera in AI LOTO Monitoring</h3>
+          <ol class="steps">
+            <li>Enter a clear camera Name.</li>
+            <li>
+              Enter the Camera IP and Port. The current camera port is
+              <span class="kbd">80</span>.
+            </li>
+            <li>
+              Enter the Human Count Endpoint:
+              <span class="kbd">POST:/api/GetObjectList</span>.
+            </li>
+            <li>
+              Under <strong>People Count Volumes</strong>, enter
+              <span class="kbd">Volume001</span>.
+            </li>
+            <li>
+              Under <strong>Fall Detection Volumes</strong>, enter
+              <span class="kbd">Volume002</span> (People Falling Zone /
+              Evaluation ID 2).
+            </li>
+            <li>
+              Save and confirm
+              <strong>Connection Status = Connected</strong> and that Live
+              People changes when a person enters/leaves the configured
+              Volume001 region.
+            </li>
+            <li>
+              Perform a controlled fall-detection test and confirm the
+              Monitoring Dashboard changes from NORMAL/DETECTING to FALL
+              DETECTED according to the configured persistence time.
+            </li>
+          </ol>
+          <figure class="figure focus">
+            <img
+              loading="lazy"
+              src="assets/screenshots/camera-new.jpg"
+              alt="Add Camera drawer."
+            />
+            <figcaption>
+              Add Camera drawer — use <span class="kbd">Volume001</span> for
+              People Count and <span class="kbd">Volume002</span> for Fall
+              Detection.
+            </figcaption>
+          </figure>
+          <figure class="figure focus">
+            <img
+              loading="lazy"
+              src="assets/screenshots/camera-details.jpg"
+              alt="Camera Details including polling and configured people/fall volumes."
+            />
+            <figcaption>
+              Camera Details — verify polling, connection state, people-count
+              volume and fall-detection evaluation mapping.
+            </figcaption>
+          </figure>
+          <div class="callout warn">
+            <strong>Commission the fields before normal operation</strong>The 3D
+            field position is installation-specific. Validate standing, walking,
+            crouching and controlled fall scenarios at the actual site. Make
+            sure people-detection zones do not overlap between cameras. AI LOTO
+            does not perform cross-camera person de-duplication, so overlap can
+            count the same person twice.
+          </div>
+          <h2 id="shopfloor">5. Shopfloor Layout</h2>
+          <p>
+            The shopfloor image is used only for visualization; it does not
+            change hardware assignments.
+          </p>
+          <ol class="steps">
+            <li>Choose a PNG, JPEG or WebP floor-plan image.</li>
+            <li>Enter a Name.</li>
+            <li>
+              Select Theme Mode: <strong>Light</strong>,
+              <strong>Dark</strong> or <strong>Both</strong>. Use Both when the
+              same image is suitable for both themes.
+            </li>
+            <li>
+              Select <strong>Set active after upload</strong> when appropriate,
+              then Upload.
+            </li>
+            <li>
+              Select a registered Gate and click the floor plan to place it.
+            </li>
+            <li>
+              Drag the marker to fine-tune position. Use Left 90°, Right 90° or
+              Reset to adjust marker rotation.
+            </li>
+            <li>Repeat until all required gates show Placed.</li>
+          </ol>
+          <figure class="figure">
+            <img
+              loading="lazy"
+              src="assets/screenshots/shopfloor-upload.jpg"
+              alt="Shopfloor Layout — upload and activate a floor plan."
+            />
+            <figcaption>
+              Shopfloor Layout — upload and activate a floor plan.
+            </figcaption>
+          </figure>
+          <figure class="figure">
+            <img
+              loading="lazy"
+              src="assets/screenshots/shopfloor-positioning.jpg"
+              alt="Place and rotate gate markers using normalized positions on the active floor plan."
+            />
+            <figcaption>
+              Place and rotate gate markers using normalized positions on the
+              active floor plan.
+            </figcaption>
+          </figure>
+          <h2 id="verify">6. Final commissioning checks</h2>
+          <ul>
+            <li>
+              Each Visionary-B Two camera has the approved AI-Assist application
+              installed and shown on its Home page; the documented example uses
+              AI-Assist version 2.0.2.
+            </li>
+            <li>Every required gateway is Connected and initialized.</li>
+            <li>Every required gate access device is Connected.</li>
+            <li>
+              Every gate has a valid access device and three I/O mappings.
+            </li>
+            <li>
+              AUX state changes physically when the gate/FlexLock changes.
+            </li>
+            <li>
+              Every camera is Connected and returns expected counts/evaluation
+              states.
+            </li>
+            <li>
+              An active floor plan is visible on Monitoring with all gates
+              placed.
+            </li>
+            <li>
+              Test one controlled IN and OUT scan at each gate, then test the
+              approved cross-gate scenario.
+            </li>
+            <li>
+              Verify Alarm outputs against the expected logical conditions.
+            </li>
+          </ul>
+          <footer class="footer">
+            <strong>AI LOTO Monitoring</strong> · System v2.0.0 · End-User
+            Manual v1.0.0 · SICK.
+          </footer>
+        </article>
+      </main>
+    </div>
+    <script src="assets/js/manual.js"></script>
+  </body>
+</html>
