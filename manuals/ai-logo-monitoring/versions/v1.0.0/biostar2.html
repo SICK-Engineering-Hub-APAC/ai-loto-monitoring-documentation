@@ -1,20 +1,20 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta name="description" content="BioStar 2 Integration" />
-    <title>BioStar 2 Integration — AI LOTO Monitoring</title>
+    <title>BioStar 2 Integration â€” AI LOTO Monitoring</title>
     <link rel="stylesheet" href="assets/css/manual.css" />
   </head>
   <body data-page="biostar2.html">
     <div class="layout">
       <aside class="sidebar">
         <div class="brand">
-          <img src="assets/images/sick-logo-blue.svg" alt="SICK" />
+          <img src="assets/images/sick-logo-transparent.png" alt="SICK" />
           <h1>AI LOTO Monitoring</h1>
           <p>
-            End-User Manual · v1.0.0<br />Supported system · v2.0.0<br />SICK
+            End-User Manual Â· v1.0.0<br />Supported system Â· v2.0.0<br />SICK
           </p>
         </div>
         <nav class="nav">
@@ -53,7 +53,7 @@
       </aside>
       <main class="main">
         <header class="topbar">
-          <button id="mobileMenu" class="mobile-menu">☰ Menu</button>
+          <button id="mobileMenu" class="mobile-menu">â˜° Menu</button>
           <div class="title">BioStar 2 Integration</div>
         </header>
         <article class="content">
@@ -74,7 +74,7 @@
               Prepare each Suprema fingerprint/face/card scanner on the network:
               assign its approved unique IP configuration and confirm the
               BioStar server can reach its device port (normally 51211 for
-              Server → Device). The scanner can then be searched and registered
+              Server â†’ Device). The scanner can then be searched and registered
               from LOTO Gate Access Device Management; it does not have to be
               manually pre-created in BioStar when using this workflow.
             </li>
@@ -88,7 +88,7 @@
               operations).
             </li>
             <li>
-              In AI LOTO <strong>Settings → BioStar2 Server</strong>, configure
+              In AI LOTO <strong>Settings â†’ BioStar2 Server</strong>, configure
               the REST Base URL, browser-facing Web URL, WebSocket URL, Login ID
               and Login Password.
             </li>
@@ -115,10 +115,10 @@
             <img
               loading="lazy"
               src="assets/screenshots/settings-biostar.jpg"
-              alt="Settings — BioStar 2 REST/Web/WebSocket URLs, login credentials and self-signed-certificate option."
+              alt="Settings â€” BioStar 2 REST/Web/WebSocket URLs, login credentials and self-signed-certificate option."
             />
             <figcaption>
-              Settings — BioStar 2 REST/Web/WebSocket URLs, login credentials
+              Settings â€” BioStar 2 REST/Web/WebSocket URLs, login credentials
               and self-signed-certificate option.
             </figcaption>
           </figure>
@@ -139,7 +139,7 @@
                   <td>BioStar2 Web URL</td>
                   <td>
                     Browser-facing BioStar Web UI URL used by the embedded
-                    management feature and “Open in BioStar”.
+                    management feature and â€œOpen in BioStarâ€.
                   </td>
                 </tr>
                 <tr>
@@ -342,7 +342,7 @@
                   <td>Connection mode</td>
                   <td>
                     The normal LOTO direct TCP-search workflow uses
-                    <strong>Server → Device</strong>. BioStar initiates the
+                    <strong>Server â†’ Device</strong>. BioStar initiates the
                     connection to the scanner.
                   </td>
                 </tr>
@@ -391,22 +391,22 @@
             <img
               loading="lazy"
               src="assets/screenshots/access-device-new.jpg"
-              alt="Gate Access Device registration — exact IP and port with TCP Search."
+              alt="Gate Access Device registration â€” exact IP and port with TCP Search."
             />
             <figcaption>
-              Gate Access Device registration — enter the physical scanner's
+              Gate Access Device registration â€” enter the physical scanner's
               exact IP and port, then use TCP Search.
             </figcaption>
           </figure>
 
-          <h3>4.3 If Device → Server is intentionally used</h3>
+          <h3>4.3 If Device â†’ Server is intentionally used</h3>
           <p>
-            BioStar 2 also supports <strong>Device → Server</strong>. In that
+            BioStar 2 also supports <strong>Device â†’ Server</strong>. In that
             topology, the scanner initiates the connection to BioStar and must
             be configured with the correct BioStar server address/port. Such a
             device can appear under the waiting-device workflow. Use this mode
             only when it is part of the approved network design; the standard
-            LOTO direct-registration instructions above assume Server → Device.
+            LOTO direct-registration instructions above assume Server â†’ Device.
           </p>
 
           <h3>4.4 Synchronize a device already added in BioStar</h3>
@@ -425,7 +425,7 @@
                   href="https://support.supremainc.com/en/support/solutions/articles/24000075522--biostar-2-how-to-add-devices"
                   target="_blank"
                   rel="noopener"
-                  >BioStar 2 — How to add devices</a
+                  >BioStar 2 â€” How to add devices</a
                 >
               </li>
               <li>
@@ -433,7 +433,7 @@
                   href="https://support.supremainc.com/en/support/solutions/articles/24000005909--biostar-2-server-and-device-port-usage"
                   target="_blank"
                   rel="noopener"
-                  >BioStar 2 — Server and device port usage</a
+                  >BioStar 2 â€” Server and device port usage</a
                 >
               </li>
               <li>
@@ -441,7 +441,7 @@
                   href="https://support.supremainc.com/en/support/solutions/articles/24000007206"
                   target="_blank"
                   rel="noopener"
-                  >BioStar 2 — Connection modes and troubleshooting</a
+                  >BioStar 2 â€” Connection modes and troubleshooting</a
                 >
               </li>
             </ul>
@@ -449,7 +449,7 @@
           <h2 id="event">5. What LOTO expects from BioStar events</h2>
           <ul>
             <li>
-              Successful event type in the IDENTIFY_SUCCESS… or VERIFY_SUCCESS…
+              Successful event type in the IDENTIFY_SUCCESSâ€¦ or VERIFY_SUCCESSâ€¦
               families.
             </li>
             <li>A valid BioStar user ID.</li>
@@ -465,8 +465,8 @@
             transitions.
           </p>
           <footer class="footer">
-            <strong>AI LOTO Monitoring</strong> · System v2.0.0 · End-User
-            Manual v1.0.0 · SICK.
+            <strong>AI LOTO Monitoring</strong> Â· System v2.0.0 Â· End-User
+            Manual v1.0.0 Â· SICK.
           </footer>
         </article>
       </main>
@@ -474,3 +474,4 @@
     <script src="assets/js/manual.js"></script>
   </body>
 </html>
+

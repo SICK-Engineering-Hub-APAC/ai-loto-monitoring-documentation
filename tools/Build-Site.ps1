@@ -22,14 +22,14 @@ function New-SiteShell {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>$([System.Net.WebUtility]::HtmlEncode($Title))</title>
-    <link rel="icon" type="image/jpeg" href="assets/images/sick-logo.jpg">
+    <link rel="icon" type="image/png" href="assets/images/sick-s-logo.png">
     <link rel="stylesheet" href="assets/site/site.css">
   </head>
   <body>
     <header class="site-header">
       <div class="site-header__inner">
         <a class="brand" href="index.html">
-          <img class="brand__logo" src="assets/images/sick-logo.jpg" alt="SICK">
+          <img class="brand__logo" src="assets/images/sick-logo-transparent.png" alt="SICK">
           <span>AI LOTO Monitoring</span>
         </a>
         <nav class="nav" aria-label="Primary navigation">
@@ -79,14 +79,14 @@ function New-ManualVersionsHtml {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>$title versions</title>
-    <link rel="icon" type="image/jpeg" href="../../assets/images/sick-logo.jpg">
+    <link rel="icon" type="image/png" href="../../assets/images/sick-s-logo.png">
     <link rel="stylesheet" href="../../assets/site/site.css">
   </head>
   <body>
     <header class="site-header">
       <div class="site-header__inner">
         <a class="brand" href="../../index.html">
-          <img class="brand__logo" src="../../assets/images/sick-logo.jpg" alt="SICK">
+          <img class="brand__logo" src="../../assets/images/sick-logo-transparent.png" alt="SICK">
           <span>AI LOTO Monitoring</span>
         </a>
         <nav class="nav" aria-label="Primary navigation">
@@ -130,14 +130,14 @@ function New-LatestRedirectHtml {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="refresh" content="0; url=$latest/index.html">
     <title>$title latest</title>
-    <link rel="icon" type="image/jpeg" href="../../assets/images/sick-logo.jpg">
+    <link rel="icon" type="image/png" href="../../assets/images/sick-s-logo.png">
     <link rel="stylesheet" href="../../assets/site/site.css">
   </head>
   <body>
     <header class="site-header">
       <div class="site-header__inner">
         <a class="brand" href="../../index.html">
-          <img class="brand__logo" src="../../assets/images/sick-logo.jpg" alt="SICK">
+          <img class="brand__logo" src="../../assets/images/sick-logo-transparent.png" alt="SICK">
           <span>AI LOTO Monitoring</span>
         </a>
         <nav class="nav" aria-label="Primary navigation">

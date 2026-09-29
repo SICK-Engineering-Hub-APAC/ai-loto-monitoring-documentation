@@ -1,20 +1,20 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta name="description" content="How the System Operates" />
-    <title>How the System Operates — AI LOTO Monitoring</title>
+    <title>How the System Operates â€” AI LOTO Monitoring</title>
     <link rel="stylesheet" href="assets/css/manual.css" />
   </head>
   <body data-page="operations.html">
     <div class="layout">
       <aside class="sidebar">
         <div class="brand">
-          <img src="assets/images/sick-logo-blue.svg" alt="SICK" />
+          <img src="assets/images/sick-logo-transparent.png" alt="SICK" />
           <h1>AI LOTO Monitoring</h1>
           <p>
-            End-User Manual · v1.0.0<br />Supported system · v2.0.0<br />SICK
+            End-User Manual Â· v1.0.0<br />Supported system Â· v2.0.0<br />SICK
           </p>
         </div>
         <nav class="nav">
@@ -53,7 +53,7 @@
       </aside>
       <main class="main">
         <header class="topbar">
-          <button id="mobileMenu" class="mobile-menu">☰ Menu</button>
+          <button id="mobileMenu" class="mobile-menu">â˜° Menu</button>
           <div class="title">How the System Operates</div>
         </header>
         <article class="content">
@@ -66,19 +66,19 @@
           <h2 id="auth-flow">1. Successful authentication flow</h2>
           <div class="flow">
             <span class="node">Worker successfully authenticates</span>
-            <span class="arrow">→</span>
+            <span class="arrow">â†’</span>
             <span class="node">Identify the gate</span>
-            <span class="arrow">→</span>
+            <span class="arrow">â†’</span>
             <span class="node">Check whether to record ENTER or EXIT</span>
-            <span class="arrow">→</span>
+            <span class="arrow">â†’</span>
             <span class="node">Update monitoring</span>
-            <span class="arrow">→</span>
+            <span class="arrow">â†’</span>
             <span class="node">Open or close the gate</span>
           </div>
           <p>
             The backend accepts successful BioStar authentication families such
-            as <span class="badge-blue">IDENTIFY_SUCCESS…</span> and
-            <span class="badge-blue">VERIFY_SUCCESS…</span>. The authentication
+            as <span class="badge-blue">IDENTIFY_SUCCESSâ€¦</span> and
+            <span class="badge-blue">VERIFY_SUCCESSâ€¦</span>. The authentication
             method is classified as Fingerprint, Face, NFC/Card or Unknown. The
             BioStar device ID in the event must match a local Gate Access Device
             that is assigned to a Gate.
@@ -91,8 +91,8 @@
           </div>
           <h2 id="direction">2. How ENTER and EXIT are determined</h2>
           <p>
-            The scanner does not have a permanent “IN” or “OUT” direction. The
-            system uses the worker’s active state:
+            The scanner does not have a permanent â€œINâ€ or â€œOUTâ€ direction. The
+            system uses the workerâ€™s active state:
           </p>
           <div class="grid2">
             <div class="card">
@@ -159,9 +159,9 @@
           </ol>
           <h2 id="gate-open">3. Gate open sequence</h2>
           <div class="flow">
-            <span class="node">FlexLock DO OFF</span><span class="arrow">→</span
-            ><span class="node">Wait AUX OFF</span><span class="arrow">→</span
-            ><span class="node">MB1 Sol DO ON</span><span class="arrow">→</span
+            <span class="node">FlexLock DO OFF</span><span class="arrow">â†’</span
+            ><span class="node">Wait AUX OFF</span><span class="arrow">â†’</span
+            ><span class="node">MB1 Sol DO ON</span><span class="arrow">â†’</span
             ><span class="node">Gate OPENED</span>
           </div>
           <div class="table-wrap">
@@ -205,9 +205,9 @@
           </div>
           <h2 id="gate-close">4. Gate close sequence</h2>
           <div class="flow">
-            <span class="node">MB1 Sol DO OFF</span><span class="arrow">→</span
-            ><span class="node">Wait AUX ON</span><span class="arrow">→</span
-            ><span class="node">FlexLock DO ON</span><span class="arrow">→</span
+            <span class="node">MB1 Sol DO OFF</span><span class="arrow">â†’</span
+            ><span class="node">Wait AUX ON</span><span class="arrow">â†’</span
+            ><span class="node">FlexLock DO ON</span><span class="arrow">â†’</span
             ><span class="node">Gate CLOSED</span>
           </div>
           <div class="table-wrap">
@@ -334,7 +334,7 @@
             Outputs are evaluated independently. For example, Red can be ON at
             the same time as Fall and/or Mismatch. If required safety facts are
             not available after startup, the software keeps the logical alarm
-            outputs LOW rather than inventing a “safe” state.
+            outputs LOW rather than inventing a â€œsafeâ€ state.
           </p>
           <h3>Default Alarm SIG300 mapping</h3>
           <div class="table-wrap">
@@ -423,8 +423,8 @@
             </li>
           </ul>
           <footer class="footer">
-            <strong>AI LOTO Monitoring</strong> · System v2.0.0 · End-User
-            Manual v1.0.0 · SICK.
+            <strong>AI LOTO Monitoring</strong> Â· System v2.0.0 Â· End-User
+            Manual v1.0.0 Â· SICK.
           </footer>
         </article>
       </main>
@@ -432,3 +432,4 @@
     <script src="assets/js/manual.js"></script>
   </body>
 </html>
+
