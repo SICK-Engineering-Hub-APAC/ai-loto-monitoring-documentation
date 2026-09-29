@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta name="description" content="System Configuration" />
-    <title>System Configuration â€” AI LOTO Monitoring</title>
+    <title>System Configuration — AI LOTO Monitoring</title>
     <link rel="stylesheet" href="assets/css/manual.css" />
   </head>
   <body data-page="configuration.html">
@@ -14,7 +14,7 @@
           <img src="assets/images/sick-logo-transparent.png" alt="SICK" />
           <h1>AI LOTO Monitoring</h1>
           <p>
-            End-User Manual Â· v1.0.0<br />Supported system Â· v2.0.0<br />SICK
+            End-User Manual · v1.0.0<br />Supported system · v2.0.0<br />SICK
           </p>
         </div>
         <nav class="nav">
@@ -53,15 +53,15 @@
       </aside>
       <main class="main">
         <header class="topbar">
-          <button id="mobileMenu" class="mobile-menu">â˜° Menu</button>
+          <button id="mobileMenu" class="mobile-menu">☰ Menu</button>
           <div class="title">System Configuration</div>
         </header>
         <article class="content">
           <h1>System Configuration</h1>
           <p class="lead">
             For a new installation, configure hardware references in this order:
-            Gateway Devices â†’ Gate Access Devices â†’ Gates â†’ Cameras â†’ Shopfloor
-            Layout â†’ Settings validation.
+            Gateway Devices → Gate Access Devices → Gates → Cameras → Shopfloor
+            Layout → Settings validation.
           </p>
           <div class="callout warn">
             <strong>Before editing</strong>Configuration changes affect gate
@@ -76,11 +76,11 @@
           </p>
           <ul>
             <li>
-              <strong>Gate Control</strong> â€” drives FlexLock and MB1 Sol and
+              <strong>Gate Control</strong> — drives FlexLock and MB1 Sol and
               reads FlexLock AUX.
             </li>
             <li>
-              <strong>Alarm</strong> â€” drives Green, Orange, Red, Fall and
+              <strong>Alarm</strong> — drives Green, Orange, Red, Fall and
               Mismatch outputs.
             </li>
           </ul>
@@ -142,17 +142,17 @@
               </thead>
               <tbody>
                 <tr>
-                  <td>P1â€“P4</td>
+                  <td>P1–P4</td>
                   <td>Pin 2, Pin 4</td>
                   <td>Pin 2 = iqValue; Pin 4 = cqValue</td>
                 </tr>
                 <tr>
-                  <td>P5â€“P6</td>
+                  <td>P5–P6</td>
                   <td>Pin 2, Pin 4, Pin 5</td>
                   <td>Pin 2 = iqValue; Pin 4 = cqValue; Pin 5 = iq5Value</td>
                 </tr>
                 <tr>
-                  <td>P7â€“P8</td>
+                  <td>P7–P8</td>
                   <td>Pin 4</td>
                   <td>Pin 4 = cqValue</td>
                 </tr>
@@ -197,7 +197,7 @@
                 </tr>
                 <tr>
                   <td>Unassigned</td>
-                  <td>â€”</td>
+                  <td>—</td>
                   <td>Not managed by Site Safety.</td>
                 </tr>
               </tbody>
@@ -229,7 +229,7 @@
               alt="Gate Access Device Management."
             />
             <figcaption>
-              Gate Access Device Management â€” registered BioStar devices,
+              Gate Access Device Management — registered BioStar devices,
               connection state and Gate assignment.
             </figcaption>
           </figure>
@@ -268,7 +268,7 @@
               routing/firewall rules must already exist.
             </li>
             <li>
-              For the standard <strong>Server â†’ Device</strong> flow, the
+              For the standard <strong>Server → Device</strong> flow, the
               scanner's device communication port is normally
               <strong>51211</strong>. If the port was intentionally changed on
               the scanner, enter that configured value instead.
@@ -326,10 +326,10 @@
             <img
               loading="lazy"
               src="assets/screenshots/access-device-new.jpg"
-              alt="Add Gate Access Device â€” enter the scanner IP and device port, then use TCP Search."
+              alt="Add Gate Access Device — enter the scanner IP and device port, then use TCP Search."
             />
             <figcaption>
-              Add Gate Access Device â€” standard commissioning uses the exact
+              Add Gate Access Device — standard commissioning uses the exact
               scanner IP plus device port, then TCP Search.
             </figcaption>
           </figure>
@@ -337,10 +337,10 @@
             <img
               loading="lazy"
               src="assets/screenshots/access-devices-edit.png"
-              alt="Gate Access Device Management â€” edit drawer."
+              alt="Gate Access Device Management — edit drawer."
             />
             <figcaption>
-              Gate Access Device Management â€” edit drawer for a registered
+              Gate Access Device Management — edit drawer for a registered
               BioStar device, showing connection state and Gate assignment.
             </figcaption>
           </figure>
@@ -356,10 +356,10 @@
           <h3>Connection mode</h3>
           <p>
             The standard direct IP/port workflow shown above uses
-            <strong>Server â†’ Device</strong>, which is also BioStar 2's default
+            <strong>Server → Device</strong>, which is also BioStar 2's default
             device-connection mode. In this mode, the BioStar server initiates
             the connection to the scanner's device port (normally 51211). If the
-            installation intentionally uses <strong>Device â†’ Server</strong>,
+            installation intentionally uses <strong>Device → Server</strong>,
             configure that topology according to the site/BioStar device setup;
             such devices may first appear as waiting devices instead of being
             commissioned through the normal direct TCP-search flow.
@@ -381,7 +381,7 @@
               alt="Access Device details and synchronized BioStar information."
             />
             <figcaption>
-              Access Device details â€” BioStar identity, network information,
+              Access Device details — BioStar identity, network information,
               connection state and Gate mapping.
             </figcaption>
           </figure>
@@ -465,10 +465,10 @@
             <img
               loading="lazy"
               src="assets/screenshots/gate-details.jpg"
-              alt="Gate Details â€” devices, runtime state, AUX, outputs, failures and pin assignments."
+              alt="Gate Details — devices, runtime state, AUX, outputs, failures and pin assignments."
             />
             <figcaption>
-              Gate Details â€” devices, runtime state, AUX, outputs, failures and
+              Gate Details — devices, runtime state, AUX, outputs, failures and
               pin assignments.
             </figcaption>
           </figure>
@@ -529,27 +529,27 @@
             </figcaption>
           </figure>
 
-          <h4>Step 1 â€” Tune person recognition</h4>
+          <h4>Step 1 — Tune person recognition</h4>
           <ol class="steps">
             <li>
               Open the camera WebUI at
               <span class="kbd">http://&lt;camera-ip&gt;/</span>.
             </li>
-            <li>Go to <strong>Configuration â†’ Object recognition</strong>.</li>
+            <li>Go to <strong>Configuration → Object recognition</strong>.</li>
             <li>
               Under <strong>Persons</strong>, fine-tune the following parameters
               for stable and reliable detection:
               <ul>
                 <li>
-                  <strong>Recognition time</strong> â€” how long the object must
+                  <strong>Recognition time</strong> — how long the object must
                   satisfy the person criteria before it is accepted.
                 </li>
                 <li>
-                  <strong>Holding time</strong> â€” how long a detected person
+                  <strong>Holding time</strong> — how long a detected person
                   remains held after the detection condition disappears.
                 </li>
                 <li>
-                  <strong>Sensitivity</strong> â€” adjust only as needed to
+                  <strong>Sensitivity</strong> — adjust only as needed to
                   improve reliable person detection without causing unwanted
                   detections.
                 </li>
@@ -571,7 +571,7 @@
                 alt="Visionary-B Two Object recognition page showing Persons recognition time, holding time and sensitivity."
             /></a>
             <figcaption>
-              <strong>Object recognition â€” Persons.</strong> Adjust
+              <strong>Object recognition — Persons.</strong> Adjust
               <strong>Recognition time</strong>,
               <strong>Holding time</strong> and
               <strong>Sensitivity</strong> during commissioning so person
@@ -580,13 +580,13 @@
           </figure>
 
           <h4>
-            Step 2 â€” Create the People Detection Zone (<span class="kbd"
+            Step 2 — Create the People Detection Zone (<span class="kbd"
               >Volume001</span
             >
             / Evaluation ID 1)
           </h4>
           <ol class="steps">
-            <li>Go to <strong>Application â†’ Field evaluation</strong>.</li>
+            <li>Go to <strong>Application → Field evaluation</strong>.</li>
             <li>
               Create or open the field-evaluation group used for this camera.
             </li>
@@ -618,7 +618,7 @@
                 alt="Visionary-B Two Field evaluation showing Evaluation ID 1 for the People Detection Zone."
             /></a>
             <figcaption>
-              <strong>People Detection Zone â€” Volume001.</strong> Configure
+              <strong>People Detection Zone — Volume001.</strong> Configure
               <strong>Evaluation ID 1</strong> with
               <strong>Detected objects = Persons</strong>. Fine-tune the
               minimum-person-portion threshold and zone geometry for the real
@@ -638,14 +638,14 @@
           </div>
 
           <h4>
-            Step 3 â€” Create the People Falling Zone (<span class="kbd"
+            Step 3 — Create the People Falling Zone (<span class="kbd"
               >Volume002</span
             >
             / Evaluation ID 2)
           </h4>
           <ol class="steps">
             <li>
-              In the same <strong>Application â†’ Field evaluation</strong> group,
+              In the same <strong>Application → Field evaluation</strong> group,
               add a second evaluation.
             </li>
             <li>Set <strong>Detected objects = Persons</strong>.</li>
@@ -678,7 +678,7 @@
                 alt="Visionary-B Two Field evaluation showing Evaluation ID 2 for the People Falling Zone."
             /></a>
             <figcaption>
-              <strong>People Falling Zone â€” Volume002.</strong> Configure
+              <strong>People Falling Zone — Volume002.</strong> Configure
               <strong>Evaluation ID 2</strong> with
               <strong>Detected objects = Persons</strong>. The falling zone is
               normally positioned low in the monitored area and must be verified
@@ -734,7 +734,7 @@
               alt="Add Camera drawer."
             />
             <figcaption>
-              Add Camera drawer â€” use <span class="kbd">Volume001</span> for
+              Add Camera drawer — use <span class="kbd">Volume001</span> for
               People Count and <span class="kbd">Volume002</span> for Fall
               Detection.
             </figcaption>
@@ -746,7 +746,7 @@
               alt="Camera Details including polling and configured people/fall volumes."
             />
             <figcaption>
-              Camera Details â€” verify polling, connection state, people-count
+              Camera Details — verify polling, connection state, people-count
               volume and fall-detection evaluation mapping.
             </figcaption>
           </figure>
@@ -779,7 +779,7 @@
               Select a registered Gate and click the floor plan to place it.
             </li>
             <li>
-              Drag the marker to fine-tune position. Use Left 90Â°, Right 90Â° or
+              Drag the marker to fine-tune position. Use Left 90°, Right 90° or
               Reset to adjust marker rotation.
             </li>
             <li>Repeat until all required gates show Placed.</li>
@@ -788,10 +788,10 @@
             <img
               loading="lazy"
               src="assets/screenshots/shopfloor-upload.jpg"
-              alt="Shopfloor Layout â€” upload and activate a floor plan."
+              alt="Shopfloor Layout — upload and activate a floor plan."
             />
             <figcaption>
-              Shopfloor Layout â€” upload and activate a floor plan.
+              Shopfloor Layout — upload and activate a floor plan.
             </figcaption>
           </figure>
           <figure class="figure">
@@ -837,8 +837,8 @@
             </li>
           </ul>
           <footer class="footer">
-            <strong>AI LOTO Monitoring</strong> Â· System v2.0.0 Â· End-User
-            Manual v1.0.0 Â· SICK.
+            <strong>AI LOTO Monitoring</strong> · System v2.0.0 · End-User
+            Manual v1.0.0 · SICK.
           </footer>
         </article>
       </main>
@@ -846,4 +846,5 @@
     <script src="assets/js/manual.js"></script>
   </body>
 </html>
+
 
