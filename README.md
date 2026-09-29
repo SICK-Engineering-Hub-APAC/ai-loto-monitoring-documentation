@@ -6,7 +6,7 @@ Public entry points:
 
 ```text
 /                         Documentation landing page
-/ai-logo-monitoring/       Latest AI LOTO Monitoring end-user manual
+/usage-manual/             Latest AI LOTO Monitoring end-user manual
 /manuals/ai-logo-monitoring/versions.html  Version selector
 ```
 

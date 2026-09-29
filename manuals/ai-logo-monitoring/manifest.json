@@ -2,7 +2,7 @@
   "slug": "ai-logo-monitoring",
   "title": "AI LOTO Monitoring End-User Manual",
   "description": "End-user guide for AI LOTO Monitoring operation, monitoring, configuration, administration, and troubleshooting.",
-  "publicPath": "ai-logo-monitoring",
+  "publicPath": "usage-manual",
   "manualType": "usage",
   "latest": "v1.0.0",
   "versions": [
