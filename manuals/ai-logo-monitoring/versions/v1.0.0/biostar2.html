@@ -89,9 +89,9 @@
               operations).
             </li>
             <li>
-              In AI LOTO <strong>Settings → BioStar2 Server</strong>, configure
-              the REST Base URL, browser-facing Web URL, WebSocket URL, Login ID
-              and Login Password.
+              In AI LOTO <strong>Settings → BioStar2 Server</strong>, enter
+              the BioStar2 Base URL, Web URL, WebSocket URL, Login ID and Login
+              Password. Use addresses that are reachable in your deployment.
             </li>
             <li>
               For an on-premise installation using a trusted
@@ -100,8 +100,16 @@
               for that deployment.
             </li>
             <li>
-              Save, then open <strong>BioStar 2 User Management</strong> in LOTO
-              to validate the embedded session.
+              Check <strong>BioStar Event Debounce Window (ms)</strong>. The
+              value shown in this manual is <strong>1000 ms</strong>, which
+              suppresses repeated successful scans from the same user and
+              device during that interval.
+            </li>
+            <li>
+              Click <strong>Save</strong> in the BioStar2 Server section, then
+              open <strong>BioStar 2 User Management</strong> in LOTO to verify
+              the embedded session. Perform a controlled scan and check that
+              its successful event appears in LOTO.
             </li>
           </ol>
           <div class="callout">
@@ -112,65 +120,126 @@
             credentials, certificate setting and reverse-proxy/network path.
           </div>
           <h2 id="settings">2. BioStar settings in LOTO</h2>
+          <p>
+            Open <strong>Settings → BioStar2 Server</strong> and review all
+            seven inputs below. The values shown in the screenshots are
+            examples from the supplied installation; replace server addresses
+            and credentials with those for your site.
+          </p>
+
+          <!-- Add the screenshot supplied for the upper BioStar settings area
+               to assets/screenshots/settings-biostar-updated.png. -->
           <figure class="figure">
-            <img
-              loading="lazy"
-              src="assets/screenshots/settings-biostar.jpg"
-              alt="Settings — BioStar 2 REST/Web/WebSocket URLs, login credentials and self-signed-certificate option."
-            />
+            <a href="assets/screenshots/settings-biostar-updated.png"
+               target="_blank" rel="noopener">
+              <img
+                loading="lazy"
+                src="assets/screenshots/settings-biostar-updated.png"
+                alt="BioStar2 Server settings: API, Web and WebSocket URLs, credentials, and self-signed certificate option."
+              />
+            </a>
             <figcaption>
-              Settings — BioStar 2 REST/Web/WebSocket URLs, login credentials
-              and self-signed-certificate option.
+              BioStar2 Server settings — enter the three service addresses,
+              integration account credentials and approved certificate option.
             </figcaption>
           </figure>
+
           <div class="table-wrap">
             <table class="table">
               <thead>
                 <tr>
                   <th>Setting</th>
-                  <th>Purpose</th>
+                  <th>Shown value / Example</th>
+                  <th>What it controls</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
                   <td>BioStar2 Base URL</td>
-                  <td>REST API server URL used by the backend.</td>
+                  <td><span class="kbd">https://localhost:5002</span></td>
+                  <td>REST API address used by the LOTO backend to access BioStar 2.</td>
                 </tr>
                 <tr>
                   <td>BioStar2 Web URL</td>
+                  <td><span class="kbd">https://localhost:5002</span></td>
                   <td>
-                    Browser-facing BioStar Web UI URL used by the embedded
-                    management feature and “Open in BioStar”.
+                    BioStar 2 Web UI address used by the embedded management
+                    page and “Open in BioStar”.
                   </td>
                 </tr>
                 <tr>
                   <td>BioStar2 WebSocket URL</td>
-                  <td>
-                    Real-time event endpoint used to receive
-                    access/authentication events.
-                  </td>
+                  <td><span class="kbd">wss://localhost:5002/wsapi</span></td>
+                  <td>Endpoint used for real-time BioStar authentication events.</td>
                 </tr>
                 <tr>
-                  <td>BioStar2 Login ID / Password</td>
-                  <td>Integration account used server-side by AI LOTO.</td>
+                  <td>BioStar2 Login ID</td>
+                  <td>admin</td>
+                  <td>BioStar 2 integration account with the required permissions.</td>
+                </tr>
+                <tr>
+                  <td>BioStar2 Login Password</td>
+                  <td>Configured password</td>
+                  <td>Password for the integration account.</td>
                 </tr>
                 <tr>
                   <td>Allow Self-Signed Certificate</td>
+                  <td>Enabled in the example</td>
                   <td>
-                    Lets backend HTTPS calls accept a self-signed BioStar
-                    certificate.
+                    Allows LOTO backend TLS calls to accept the deployment's
+                    self-signed BioStar certificate when explicitly approved.
+                    It does not automatically resolve browser certificate warnings.
                   </td>
                 </tr>
                 <tr>
-                  <td>BioStar Event Debounce Window</td>
+                  <td>BioStar Event Debounce Window (ms)</td>
+                  <td>1000</td>
                   <td>
-                    Suppresses rapid duplicate events from the same user/device.
-                    Default 1000 ms.
+                    Prevents duplicate successful authentication events from
+                    the same user and access device being processed within
+                    this time window.
                   </td>
                 </tr>
               </tbody>
             </table>
           </div>
+
+          <!-- Add the supplied screenshot showing the bottom of BioStar2 Server
+               (debounce input) to assets/screenshots/settings-camera-updated.png.
+               This screenshot also includes Camera Settings below BioStar. -->
+          <figure class="figure">
+            <a href="assets/screenshots/settings-camera-updated.png"
+               target="_blank" rel="noopener">
+              <img
+                loading="lazy"
+                src="assets/screenshots/settings-camera-updated.png"
+                alt="BioStar Event Debounce Window set to 1000 milliseconds, immediately above Camera Settings."
+              />
+            </a>
+            <figcaption>
+              <strong>BioStar Event Debounce Window</strong> — in the supplied
+              example, the value is <strong>1000 ms</strong>. This input is at
+              the bottom of the BioStar2 Server section, immediately above
+              Camera Settings.
+            </figcaption>
+          </figure>
+
+          <div class="callout">
+            <strong>Use the correct service addresses</strong>
+            The <span class="kbd">localhost</span> addresses above are only
+            examples. Use the address reachable by the LOTO backend for the
+            Base URL, and the appropriate browser-facing address/proxy for the
+            Web URL. Confirm that the WebSocket URL reaches the configured
+            BioStar real-time event service.
+          </div>
+          <ol class="steps">
+            <li>Check all BioStar2 Server inputs for your installation.</li>
+            <li>Click <strong>Save</strong> at the bottom of this section.</li>
+            <li>
+              Open the embedded BioStar 2 User Management page, then perform
+              a controlled scan and verify that the LOTO event is recorded.
+            </li>
+          </ol>
           <h2 id="users">3. Create a BioStar worker from the LOTO UI</h2>
           <p>
             Admin users can open <strong>BioStar 2 User Management</strong> in
