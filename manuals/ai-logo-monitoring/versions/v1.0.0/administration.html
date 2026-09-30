@@ -148,10 +148,11 @@
           </p>
           <h2 id="settings">3. Settings</h2>
           <p>
-            Before commissioning, open <strong>Settings</strong> and review
-            the three sections below: <strong>General Settings</strong>,
-            <strong>BioStar2 Server</strong>, and <strong>Camera Settings</strong>.
-            Adjust the values to match your site and click <strong>Save</strong>
+            Before commissioning, open <strong>Settings</strong> and review the
+            three sections below: <strong>General Settings</strong>,
+            <strong>BioStar2 Server</strong>, and
+            <strong>Camera Settings</strong>. Adjust the values to match your
+            site and click <strong>Save</strong>
             in each section after making changes.
           </p>
 
@@ -160,8 +161,11 @@
                (provided image: settings-1(1).png) -->
           <h3>3.1 General Settings</h3>
           <figure class="figure">
-            <a href="assets/screenshots/settings-general-updated.png"
-               target="_blank" rel="noopener">
+            <a
+              href="assets/screenshots/settings-general-updated.png"
+              target="_blank"
+              rel="noopener"
+            >
               <img
                 loading="lazy"
                 src="assets/screenshots/settings-general-updated.png"
@@ -192,16 +196,16 @@
                   <td>Gateway Failures Before Disconnected</td>
                   <td>3</td>
                   <td>
-                    Number of consecutive SIG300 communication failures
-                    before the gateway is marked disconnected.
+                    Number of consecutive SIG300 communication failures before
+                    the gateway is marked disconnected.
                   </td>
                 </tr>
                 <tr>
                   <td>Gateway Retry Delay (ms)</td>
                   <td>1000</td>
                   <td>
-                    Time between SIG300 initialization or communication
-                    retry attempts.
+                    Time between SIG300 initialization or communication retry
+                    attempts.
                   </td>
                 </tr>
                 <tr>
@@ -209,8 +213,8 @@
                   <td>Disabled / OFF</td>
                   <td>
                     Default digital output state applied during gateway
-                    initialization. Confirm that this matches the approved
-                    site wiring and control design.
+                    initialization. Confirm that this matches the approved site
+                    wiring and control design.
                   </td>
                 </tr>
                 <tr>
@@ -234,8 +238,11 @@
                assets/screenshots/settings-biostar-updated.png
                (provided image: settings-2(1).png) -->
           <figure class="figure">
-            <a href="assets/screenshots/settings-biostar-updated.png"
-               target="_blank" rel="noopener">
+            <a
+              href="assets/screenshots/settings-biostar-updated.png"
+              target="_blank"
+              rel="noopener"
+            >
               <img
                 loading="lazy"
                 src="assets/screenshots/settings-biostar-updated.png"
@@ -260,17 +267,24 @@
                 <tr>
                   <td>BioStar2 Base URL</td>
                   <td><span class="kbd">https://localhost:5002</span></td>
-                  <td>Address used by the backend to access the BioStar 2 REST API.</td>
+                  <td>
+                    Address used by the backend to access the BioStar 2 REST
+                    API.
+                  </td>
                 </tr>
                 <tr>
                   <td>BioStar2 Web URL</td>
                   <td><span class="kbd">https://localhost:5002</span></td>
-                  <td>BioStar 2 Web UI address used for embedded management.</td>
+                  <td>
+                    BioStar 2 Web UI address used for embedded management.
+                  </td>
                 </tr>
                 <tr>
                   <td>BioStar2 WebSocket URL</td>
                   <td><span class="kbd">wss://localhost:5002/wsapi</span></td>
-                  <td>Connection for receiving real-time authentication events.</td>
+                  <td>
+                    Connection for receiving real-time authentication events.
+                  </td>
                 </tr>
                 <tr>
                   <td>BioStar2 Login ID</td>
@@ -287,8 +301,8 @@
                   <td></td>
                   <td>
                     Permits backend TLS connections to the on-premise BioStar
-                    server when a self-signed certificate is approved for
-                    this deployment.
+                    server when a self-signed certificate is approved for this
+                    deployment.
                   </td>
                 </tr>
                 <tr>
@@ -304,23 +318,26 @@
           </div>
           <div class="callout">
             <strong>Server address reminder</strong>
-            The <span class="kbd">localhost</span> URLs above are only
-            examples from the supplied screenshot. Use addresses reachable
-            by the relevant backend or browser in your deployment.
+            The <span class="kbd">localhost</span> URLs above are only examples.
+            Use addresses reachable by the relevant backend or browser in your
+            deployment.
           </div>
 
           <h3>3.3 Camera Settings</h3>
           <p>
             Configure how often Visionary cameras are polled and how long
-            fall-detection conditions must persist before an alarm is
-            activated or cleared.
+            fall-detection conditions must persist before an alarm is activated
+            or cleared.
           </p>
           <!-- Add your updated screenshot as:
                assets/screenshots/settings-camera-updated.png
                (provided image: settings-3.png; its top also shows BioStar debounce) -->
           <figure class="figure">
-            <a href="assets/screenshots/settings-camera-updated.png"
-               target="_blank" rel="noopener">
+            <a
+              href="assets/screenshots/settings-camera-updated.png"
+              target="_blank"
+              rel="noopener"
+            >
               <img
                 loading="lazy"
                 src="assets/screenshots/settings-camera-updated.png"
@@ -347,24 +364,24 @@
                   <td>People Count Polling Duration (ms)</td>
                   <td>1000</td>
                   <td>
-                    How often the system requests people-count information
-                    from the Visionary cameras.
+                    How often the system requests people-count information from
+                    the Visionary cameras.
                   </td>
                 </tr>
                 <tr>
                   <td>Fall Detection ON Persistence (ms)</td>
                   <td>1000</td>
                   <td>
-                    How long a fall evaluation must remain infringed before
-                    the system activates the fall alarm.
+                    How long a fall evaluation must remain infringed before the
+                    system activates the fall alarm.
                   </td>
                 </tr>
                 <tr>
                   <td>Fall Detection OFF Persistence (ms)</td>
                   <td>5000</td>
                   <td>
-                    How long the fall evaluation must remain clear before
-                    the system clears the fall alarm.
+                    How long the fall evaluation must remain clear before the
+                    system clears the fall alarm.
                   </td>
                 </tr>
               </tbody>
@@ -372,10 +389,10 @@
           </div>
           <div class="callout warn">
             <strong>Review settings before commissioning</strong>
-            Verify each section and save any changes. Only change gateway
-            retry, BioStar debounce, camera polling, or fall-persistence
-            settings as part of controlled commissioning. Site settings
-            should be verified against the actual installation.
+            Verify each section and save any changes. Only change gateway retry,
+            BioStar debounce, camera polling, or fall-persistence settings as
+            part of controlled commissioning. Site settings should be verified
+            against the actual installation.
           </div>
 
           <h2 id="logs">4. Log Viewer</h2>
@@ -480,5 +497,3 @@
     <script src="assets/js/manual.js"></script>
   </body>
 </html>
-
-
