@@ -148,102 +148,236 @@
           </p>
           <h2 id="settings">3. Settings</h2>
           <p>
-            The Settings page is grouped into General, BioStar2 Server and
-            Camera Settings.
+            Before commissioning, open <strong>Settings</strong> and review
+            the three sections below: <strong>General Settings</strong>,
+            <strong>BioStar2 Server</strong>, and <strong>Camera Settings</strong>.
+            Adjust the values to match your site and click <strong>Save</strong>
+            in each section after making changes.
           </p>
+
+          <!-- Add your updated screenshot as:
+               assets/screenshots/settings-general-updated.png
+               (provided image: settings-1(1).png) -->
+          <h3>3.1 General Settings</h3>
           <figure class="figure">
-            <img
-              loading="lazy"
-              src="assets/screenshots/settings-general.jpg"
-              alt="Settings — general/runtime configuration."
-            />
-            <figcaption>Settings — general/runtime configuration.</figcaption>
+            <a href="assets/screenshots/settings-general-updated.png"
+               target="_blank" rel="noopener">
+              <img
+                loading="lazy"
+                src="assets/screenshots/settings-general-updated.png"
+                alt="General Settings showing retention, SIG300 gateway settings and site timezone."
+              />
+            </a>
+            <figcaption>
+              General Settings — configure data retention, SIG300 communication
+              recovery, default digital output state, and site timezone.
+            </figcaption>
           </figure>
           <div class="table-wrap">
             <table class="table">
               <thead>
                 <tr>
                   <th>Setting</th>
-                  <th>Default / Example</th>
+                  <th>Value example</th>
                   <th>What it controls</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td>Retention Period</td>
-                  <td>365 days</td>
-                  <td>How long system data is retained.</td>
+                  <td>Retention Period (days)</td>
+                  <td>365</td>
+                  <td>How long the application keeps system data.</td>
                 </tr>
+                <tr>
+                  <td>Gateway Failures Before Disconnected</td>
+                  <td>3</td>
+                  <td>
+                    Number of consecutive SIG300 communication failures
+                    before the gateway is marked disconnected.
+                  </td>
+                </tr>
+                <tr>
+                  <td>Gateway Retry Delay (ms)</td>
+                  <td>1000</td>
+                  <td>
+                    Time between SIG300 initialization or communication
+                    retry attempts.
+                  </td>
+                </tr>
+                <tr>
+                  <td>Gateway DO Default State</td>
+                  <td>Disabled / OFF</td>
+                  <td>
+                    Default digital output state applied during gateway
+                    initialization. Confirm that this matches the approved
+                    site wiring and control design.
+                  </td>
+                </tr>
+                <tr>
+                  <td>Site Timezone</td>
+                  <td>Asia/Seoul</td>
+                  <td>
+                    Timezone used for site-local operations and reporting.
+                    Select the timezone for the actual installation.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
 
+          <h3>3.2 BioStar2 Server</h3>
+          <p>
+            Enter the server addresses and credentials used to connect AI LOTO
+            Monitoring to BioStar 2.
+          </p>
+          <!-- Add your updated screenshot as:
+               assets/screenshots/settings-biostar-updated.png
+               (provided image: settings-2(1).png) -->
+          <figure class="figure">
+            <a href="assets/screenshots/settings-biostar-updated.png"
+               target="_blank" rel="noopener">
+              <img
+                loading="lazy"
+                src="assets/screenshots/settings-biostar-updated.png"
+                alt="BioStar2 Server settings showing server URLs, login details and certificate option."
+              />
+            </a>
+            <figcaption>
+              BioStar2 Server — configure the REST API, embedded Web UI,
+              real-time event connection, login, and certificate option.
+            </figcaption>
+          </figure>
+          <div class="table-wrap">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Setting</th>
+                  <th>Value example</th>
+                  <th>What it controls</th>
+                </tr>
+              </thead>
+              <tbody>
                 <tr>
                   <td>BioStar2 Base URL</td>
-                  <td>http://192.168.100.18</td>
-                  <td>
-                    Base URL used by AI LOTO Monitoring to access the BioStar 2
-                    REST API.
-                  </td>
+                  <td><span class="kbd">https://localhost:5002</span></td>
+                  <td>Address used by the backend to access the BioStar 2 REST API.</td>
                 </tr>
-
                 <tr>
                   <td>BioStar2 Web URL</td>
-                  <td>http://192.168.100.18</td>
-                  <td>
-                    Browser-facing BioStar 2 Web UI address used by the embedded
-                    management page.
-                  </td>
+                  <td><span class="kbd">https://localhost:5002</span></td>
+                  <td>BioStar 2 Web UI address used for embedded management.</td>
                 </tr>
-
                 <tr>
                   <td>BioStar2 WebSocket URL</td>
-                  <td>ws://192.168.100.18/wsapi</td>
-                  <td>
-                    WebSocket endpoint used to receive real-time BioStar 2
-                    events.
-                  </td>
+                  <td><span class="kbd">wss://localhost:5002/wsapi</span></td>
+                  <td>Connection for receiving real-time authentication events.</td>
                 </tr>
-
                 <tr>
                   <td>BioStar2 Login ID</td>
-                  <td>admin</td>
-                  <td>
-                    BioStar 2 administrator account used by AI LOTO Monitoring.
-                  </td>
+                  <td></td>
+                  <td>BioStar 2 account used for server authentication.</td>
                 </tr>
-
                 <tr>
                   <td>BioStar2 Login Password</td>
-                  <td>Configured password</td>
-                  <td>
-                    Password used to authenticate with the BioStar 2 server.
-                  </td>
+                  <td></td>
+                  <td>Password for the configured BioStar 2 account.</td>
                 </tr>
-
                 <tr>
                   <td>Allow Self-Signed Certificate</td>
-                  <td>Disabled</td>
+                  <td></td>
                   <td>
-                    Allows connection to an on-premise BioStar 2 server that
-                    uses a self-signed TLS certificate.
+                    Permits backend TLS connections to the on-premise BioStar
+                    server when a self-signed certificate is approved for
+                    this deployment.
                   </td>
                 </tr>
-
                 <tr>
-                  <td>People Count Polling Duration</td>
-                  <td>1000 ms</td>
+                  <td>BioStar Event Debounce Window (ms)</td>
+                  <td>1000</td>
                   <td>
-                    How often the system requests people-count information from
-                    the Visionary cameras.
+                    Suppresses duplicate successful authentication events from
+                    the same user and device within the specified time.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="callout">
+            <strong>Server address reminder</strong>
+            The <span class="kbd">localhost</span> URLs above are only
+            examples from the supplied screenshot. Use addresses reachable
+            by the relevant backend or browser in your deployment.
+          </div>
+
+          <h3>3.3 Camera Settings</h3>
+          <p>
+            Configure how often Visionary cameras are polled and how long
+            fall-detection conditions must persist before an alarm is
+            activated or cleared.
+          </p>
+          <!-- Add your updated screenshot as:
+               assets/screenshots/settings-camera-updated.png
+               (provided image: settings-3.png; its top also shows BioStar debounce) -->
+          <figure class="figure">
+            <a href="assets/screenshots/settings-camera-updated.png"
+               target="_blank" rel="noopener">
+              <img
+                loading="lazy"
+                src="assets/screenshots/settings-camera-updated.png"
+                alt="BioStar event debounce and Visionary camera polling and fall-detection persistence settings."
+              />
+            </a>
+            <figcaption>
+              Camera Settings — people-count polling and fall-detection
+              activation/clear timing. The screenshot also shows the BioStar
+              event debounce setting above this section.
+            </figcaption>
+          </figure>
+          <div class="table-wrap">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Setting</th>
+                  <th>Value example</th>
+                  <th>What it controls</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>People Count Polling Duration (ms)</td>
+                  <td>1000</td>
+                  <td>
+                    How often the system requests people-count information
+                    from the Visionary cameras.
+                  </td>
+                </tr>
+                <tr>
+                  <td>Fall Detection ON Persistence (ms)</td>
+                  <td>1000</td>
+                  <td>
+                    How long a fall evaluation must remain infringed before
+                    the system activates the fall alarm.
+                  </td>
+                </tr>
+                <tr>
+                  <td>Fall Detection OFF Persistence (ms)</td>
+                  <td>5000</td>
+                  <td>
+                    How long the fall evaluation must remain clear before
+                    the system clears the fall alarm.
                   </td>
                 </tr>
               </tbody>
             </table>
           </div>
           <div class="callout warn">
-            <strong>Changing timing values</strong>Only change polling,
-            persistence, retry or debounce values as part of controlled
-            commissioning. Very aggressive timing can increase device/network
-            load or produce undesirable operator behavior.
+            <strong>Review settings before commissioning</strong>
+            Verify each section and save any changes. Only change gateway
+            retry, BioStar debounce, camera polling, or fall-persistence
+            settings as part of controlled commissioning. Site settings
+            should be verified against the actual installation.
           </div>
+
           <h2 id="logs">4. Log Viewer</h2>
           <p>
             Use Log Viewer when a device action does not behave as expected. You
